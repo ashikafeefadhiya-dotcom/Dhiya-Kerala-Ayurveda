@@ -16,18 +16,18 @@
         .header-container {
             background: linear-gradient(135deg, #1b4d3e, #2e8b57);
             color: white;
-            padding: 30px 20px;
-            border-radius: 0 0 20px 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            padding: 25px 20px;
+            border-radius: 0 0 25px 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
             margin-bottom: 30px;
         }
         .logo-img {
-            height: 75px;
-            width: 75px;
+            height: 95px;
+            width: 95px;
             object-fit: cover;
             border-radius: 50%;
             border: 3px solid #fff;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
             background-color: #fff;
         }
         .card-custom {
@@ -54,16 +54,53 @@
             background-color: #14382c;
             transform: translateY(-1px);
         }
+        .hospital-info {
+            font-size: 0.85rem;
+            background: rgba(0, 0, 0, 0.15);
+            padding: 10px 15px;
+            border-radius: 10px;
+            margin-top: 12px;
+            line-height: 1.5;
+        }
     </style>
 </head>
 <body>
 
-    <!-- Header & Logo Section -->
-    <div class="header-container text-center">
-        <div class="container d-flex flex-column align-items-center justify-content-center">
-            <img src="logo.png" alt="Dhiya Kerala Ayurveda Logo" class="logo-img mb-3" onerror="this.style.display='none'">
-            <h1 class="fw-bold mb-1" style="font-size: 1.8rem; letter-spacing: 0.5px;">DHIYA KERALA AYURVEDA PANCHAKARMA CLINIC</h1>
-            <p class="mb-0 text-light opacity-75" style="font-size: 1rem;">Multi Branch Cloud Central System | Reception & Billing Portal</p>
+    <!-- Header & Logo Section (Left Logo, Right Details) -->
+    <div class="header-container">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- Left Column: Logo -->
+                <div class="col-md-2 text-center text-md-start mb-3 mb-md-0">
+                    <img src="logo.png" alt="Dhiya Kerala Ayurveda Logo" class="logo-img" onerror="this.style.display='none'">
+                </div>
+                
+                <!-- Right Column: Details -->
+                <div class="col-md-10 text-center text-md-start">
+                    <h1 class="fw-bold mb-1" style="font-size: 1.5rem; letter-spacing: 0.5px;">Dhiya Kerala Ayurveda Panchakarma Vaidhyasalai</h1>
+                    <p class="mb-1 text-warning fw-bold" style="font-size: 0.9rem;">Govt Reg number: TVMIAYU20260042869</p>
+                    
+                    <p class="mb-1 text-light small fw-semibold">
+                        Traditional Kerala Ayurveda | Panchakarma | Varma Chikitsa | Agnikarma | Physiotherapy | Ayurveda Cosmetology
+                    </p>
+                    <p class="mb-2 text-light fst-italic small">"Healing Through Authentic Ayurveda & Compassionate Care"</p>
+
+                    <!-- Addresses & Contact Box -->
+                    <div class="hospital-info text-light">
+                        <div class="row">
+                            <div class="col-md-6 mb-1 mb-md-0">
+                                <strong><i class="fas fa-hospital me-1"></i> Main Hospital:</strong> No.39, Diversion Road, Polur, Tiruvannamalai - 606803.
+                            </div>
+                            <div class="col-md-6">
+                                <strong><i class="fas fa-code-branch me-1"></i> Branch:</strong> No. 732-B, 3rd Street, Vengikkal, Tiruvannamalai - 606604.
+                            </div>
+                        </div>
+                        <div class="mt-2 text-center border-top pt-1 border-light opacity-85">
+                            <strong><i class="fas fa-phone-alt me-1"></i> Contact:</strong> 9710703855, 9171731744
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -184,10 +221,9 @@
     <!-- JavaScript Functionality -->
     <script>
         function downloadConsentForms() {
-            alert("ஒப்புதல் படிவம் (Consent Form) டவுன்லோட் தொடங்குகிறது. பிரின்ட் எடுத்து கையெழுத்து பெறலாம்.");
-            // Create simulated multiple downloads for offline/online use
+            alert("ஒப்புதல் படிவம் (Consent Form) டவுன்லோட் தொடங்குகிறது.");
             for (let i = 1; i <= 3; i++) {
-                const blob = new Blob([`Dhiya Kerala Ayurveda - Patient Consent Form #${i}\nPatient Name: ` + (document.getElementById('regName').value || 'General') + `\nDate: ` + (document.getElementById('regDate').value || new Date().toISOString().split('T')[0])], { type: 'text/plain' });
+                const blob = new Blob([`Dhiya Kerala Ayurveda - Consent Form #${i}\nPatient: ` + (document.getElementById('regName').value || 'General')], { type: 'text/plain' });
                 const link = document.createElement('a');
                 link.href = window.URL.createObjectURL(blob);
                 link.download = `Consent_Form_${i}.txt`;
@@ -199,7 +235,7 @@
 
         document.getElementById('patientRegistrationForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            alert("நோயாளி பதிவு மற்றும் ஒப்புதல் நிலை வெற்றிகரமாக சேமிக்கப்பட்டது!");
+            alert("நோயாளி பதிவு வெற்றிகரமாக சேமிக்கப்பட்டது!");
             window.location.href = "case_sheet.html";
         });
     </script>
