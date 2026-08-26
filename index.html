@@ -24,25 +24,12 @@
             border-right: 4px solid #d4af37;
             border-bottom: 4px solid #d4af37;
         }
-        .logo-box {
-            background: #ffffff;
-            padding: 6px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            border: 2px solid #d4af37;
-            height: 100%;
-            min-height: 180px;
-        }
         .logo-img {
-            width: 100%;
-            max-height: 170px;
+            max-height: 140px;
+            width: auto;
             object-fit: contain;
-            border-radius: 8px;
             display: block;
-            background-color: #ffffff;
+            margin: 0 auto;
         }
         .card-custom {
             border: none;
@@ -58,15 +45,19 @@
             color: #2c3e50;
         }
         .btn-success-custom {
-            background-color: #1b4d3e;
+            background-color: #d4af37;
+            color: #12382c;
             border: none;
-            padding: 14px 25px;
-            font-weight: 600;
+            padding: 15px 25px;
+            font-weight: bold;
+            font-size: 1.05rem;
             letter-spacing: 0.5px;
             transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
         .btn-success-custom:hover {
-            background-color: #14382c;
+            background-color: #c19b2e;
+            color: #ffffff;
             transform: translateY(-1px);
         }
         .hospital-info {
@@ -91,14 +82,12 @@
 </head>
 <body>
 
-    <!-- Header & Logo Section (Bilingual & Full Height Match) -->
+    <!-- Header & Logo Section -->
     <div class="header-container">
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-md-2 text-center mb-3 mb-md-0">
-                    <div class="logo-box">
-                        <img src="logo.png" alt="Dhiya Kerala Ayurveda Logo" class="logo-img" onerror="this.style.display='none'">
-                    </div>
+                    <img src="logo.png" alt="Dhiya Kerala Ayurveda Logo" class="logo-img" onerror="this.style.display='none'">
                 </div>
                 
                 <div class="col-md-10 text-center text-md-start">
@@ -113,6 +102,7 @@
                         பாரம்பரிய கேரளா ஆயுர்வேதா | பஞ்சகர்மா | வர்ம மருத்துவம் | அக்னிகர்மா | பிசியோதெரபி | ஆயுர்வேத அழகுக்கலை <br>
                         <span class="fst-italic text-warning">Traditional Kerala Ayurveda | Panchakarma | Varma Chikitsa | Agnikarma | Physiotherapy | Ayurveda Cosmetology</span>
                     </p>
+                    <p class="mb-2 text-light fst-italic small">"Healing Through Authentic Ayurveda & Compassionate Care"</p>
 
                     <!-- Doctors Info Box -->
                     <div class="doctor-badge text-light">
@@ -204,8 +194,8 @@
                     <div class="col-md-6">
                         <label for="regDoctor" class="form-label">மருத்துவர் (Consulting Doctor)</label>
                         <select class="form-select" id="regDoctor" required>
-                            <option value="Dr. S. Ashik Ali">Dr. S. Ashik Ali, B.A.M.S, M.B.A.(Hosp Mgmt), D.P.T, F.M.C.</option>
-                            <option value="Dr. R. Puvana">Dr. R. Puvana, B.A.M.S, M.B.A.(Hosp Mgmt), Msc(Yoga & Nat), P.G.D.A.C.(U.K), F.M.C.</option>
+                            <option value="Dr. S. Ashik Ali">Dr. S. Ashik Ali, B.A.M.S, M.B.A., D.P.T, F.M.C.</option>
+                            <option value="Dr. R. Puvana">Dr. R. Puvana, B.A.M.S, M.B.A., Msc, P.G.D.A.C., F.M.C.</option>
                         </select>
                     </div>
 
@@ -214,40 +204,50 @@
                         <input type="number" class="form-control" id="regFee" value="500" required>
                     </div>
 
-                    <!-- 20 Consent Forms & Print Section -->
+                    <!-- 20 Specific Consent Forms Dropdown & Print Section -->
                     <div class="col-12 mt-4 p-3 bg-light rounded border">
                         <h5 class="text-success fw-bold mb-2">
-                            <i class="fas fa-file-signature me-2"></i> நோயாளி ஒப்புதல் படிவம் (Patient Consent Forms)
+                            <i class="fas fa-file-signature me-2"></i> 20 கன்சென்ட் ஃபார்ம்கள் பட்டியல் (20 Specialized Consent Forms)
                         </h5>
-                        <p class="text-muted small mb-2">ரிப்ஷனில் சிகிச்சைக்கு வரும் நோயாளிகளிடம் ஒப்புதல் படிவம் பெற்று கையெழுத்திட கீழே கிளிக் செய்யவும்.</p>
+                        <p class="text-muted small mb-2">தேவையான ஒப்புதல் படிவத்தைத் தேர்ந்தெடுத்து பிரின்ட் எடுக்கவும்:</p>
+                        
                         <div class="row align-items-center g-3">
-                            <div class="col-md-6">
-                                <label for="consentName" class="form-label small">ஒப்புதல் உறுதி செய்யும் பெயர்</label>
-                                <input type="text" class="form-control form-control-sm" id="consentName" placeholder="நோயாளி பெயர்">
-                            </div>
-                            <div class="col-md-4">
-                                <label class="form-label small">படிவங்களின் நிலை (Consent Status)</label>
-                                <select class="form-select form-select-sm" id="consentStatus">
-                                    <option value="Pending">நிலுவையில் உள்ளது (Pending)</option>
-                                    <option value="Completed">நிறைவு பெற்றது (Completed)</option>
+                            <div class="col-md-9">
+                                <select class="form-select" id="selectedConsentType">
+                                    <option value="1">1. பொது ஆயுர்வேத சிகிச்சை ஒப்புதல் படிவம் (General Ayurveda Treatment Consent)</option>
+                                    <option value="2">2. பஞ்சகர்மா சிகிச்சை ஒப்புதல் படிவம் (Panchakarma Therapy Consent)</option>
+                                    <option value="3">3. வர்ம மருத்துவம் ஒப்புதல் படிவம் (Varma Chikitsa Consent)</option>
+                                    <option value="4">4. அக்னிகர்மா சிகிச்சை ஒப்புதல் படிவம் (Agnikarma Procedure Consent)</option>
+                                    <option value="5">5. சிரோதாரை சிகிச்சை ஒப்புதல் படிவம் (Shirodhara Therapy Consent)</option>
+                                    <option value="6">6. நவரக்கிழி / பிழிச்சல் ஒப்புதல் படிவம் (Navarakizhi / Pizhichil Consent)</option>
+                                    <option value="7">7. வஸ்தி (எனிமா) சிகிச்சை ஒப்புதல் படிவம் (Basti Treatment Consent)</option>
+                                    <option value="8">8. நஸ்யம் (மூலிகை நாசி மருந்து) ஒப்புதல் படிவம் (Nasya Therapy Consent)</option>
+                                    <option value="9">9. இரத்தமோட்சணம் (Leech Therapy) ஒப்புதல் படிவம் (Raktamokshana Consent)</option>
+                                    <option value="10">10. பிசியோதெரபி மற்றும் மறுவாழ்வு ஒப்புதல் படிவம் (Physiotherapy & Rehab Consent)</option>
+                                    <option value="11">11. ஆயுர்வேத அழகுக்கலை சிகிச்சை ஒப்புதல் படிவம் (Ayurveda Cosmetology Consent)</option>
+                                    <option value="12">12. மூட்டு மற்றும் முதுகுவலி சிறப்பு சிகிச்சை ஒப்புதல் (Joint & Spine Care Consent)</option>
+                                    <option value="13">13. பக்கவாதம் (Paralysis) மறுவாழ்வு சிகிச்சை ஒப்புதல் (Stroke Rehab Consent)</option>
+                                    <option value="14">14. தோல் நோய் (Skin Disorders) சிகிச்சை ஒப்புதல் (Dermatology Consent)</option>
+                                    <option value="15">15. வயிற்றுக்கோளாறு மற்றும் இரைப்பை சிகிச்சை ஒப்புதல் (Gastrointestinal Care Consent)</option>
+                                    <option value="16">16. மன அழுத்தம் மற்றும் தூக்கமின்மை சிகிச்சை ஒப்புதல் (Stress & Insomnia Care Consent)</option>
+                                    <option value="17">17. மகப்பேறு மற்றும் மகளிர் மருத்துவம் ஒப்புதல் (Gynecology Care Consent)</option>
+                                    <option value="18">18. குழந்தை மருத்துவ ஒப்புதல் படிவம் (Pediatric Ayurveda Care Consent)</option>
+                                    <option value="19">19. அறுவை சிகிச்சைக்குப் பிந்தைய ஆயுர்வேத பராமரிப்பு ஒப்புதல் (Post-Surgical Care Consent)</option>
+                                    <option value="20">20. அவசர மருத்துவ மற்றும் தீவிர சிகிச்சை ஒப்புதல் (Emergency & Critical Care Consent)</option>
                                 </select>
                             </div>
-                            <div class="col-md-2 text-end">
-                                <label class="form-label small d-block">&nbsp;</label>
-                                <button type="button" class="btn btn-outline-primary btn-sm w-100" onclick="openPrintableConsent()">
-                                    <i class="fas fa-print me-1"></i> பார்ம் / பிரின்ட்
+                            <div class="col-md-3 text-end">
+                                <button type="button" class="btn btn-outline-primary w-100 fw-bold" onclick="openPrintableConsent()">
+                                    <i class="fas fa-print me-1"></i> ஃபார்ம் பிரின்ட் (Print)
                                 </button>
                             </div>
-                        </div>
-                        <div class="mt-2 text-success small fw-bold">
-                            அனைத்துச் சேமிக்கப்பட்டவை: <span id="formCounterBadge">20 கன்சென்ட் ஃபார்ம்கள் தயாராக உள்ளன (20 Consent Forms Available)</span>
                         </div>
                     </div>
 
                     <!-- Save & Next Page (Goes to Doctor Prescription / Case Sheet) -->
                     <div class="col-12 text-center mt-4">
                         <button type="submit" class="btn btn-success-custom w-100 py-3 shadow">
-                            <i class="fas fa-stethoscope me-2"></i> சேமித்து டாக்டர் பிரஸ்கிரிப்ஷன் / கேஸ் ஷீட்டுக்குச் செல்லவும் (SAVE & NEXT PAGE)
+                            <i class="fas fa-stethoscope me-2"></i> பதிவைச் சேமித்து டாக்டர் பிரஸ்கிரிப்ஷன் / கேஸ் ஷீட்டுக்குச் செல்லவும் (SAVE & NEXT PAGE)
                         </button>
                     </div>
                 </div>
@@ -263,35 +263,58 @@
             const pGender = document.getElementById('regGender').value || '-';
             const pPhone = document.getElementById('regPhone').value || '-';
             const pDoc = document.getElementById('regDoctor').value || '-';
+            
+            const consentDropdown = document.getElementById('selectedConsentType');
+            const selectedFormTitle = consentDropdown.options[consentDropdown.selectedIndex].text;
 
-            // Opens a new professional printable window for Consent Form
+            // Opens a new professional printable window with exact selected Consent Form title and Corporate Header
             let printWindow = window.open('', '_blank');
             printWindow.document.write(`
                 <html>
                 <head>
-                    <title>Patient Consent Form - Dhiya Kerala Ayurveda</title>
+                    <title>${selectedFormTitle} - Dhiya Kerala Ayurveda</title>
                     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
                     <style>
-                        body { font-family: 'Segoe UI', Tahoma, sans-serif; padding: 30px; color: #333; }
-                        .header-box { border-bottom: 2px solid #1b4d3e; padding-bottom: 15px; margin-bottom: 25px; }
-                        .box-content { border: 1px solid #ccc; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+                        body { font-family: 'Segoe UI', Tahoma, sans-serif; padding: 20px; color: #333; background: #fff; }
+                        .print-header {
+                            background: linear-gradient(135deg, #12382c, #1b4d3e, #2e8b57);
+                            color: white;
+                            padding: 20px;
+                            border-radius: 15px;
+                            border-left: 4px solid #d4af37;
+                            border-right: 4px solid #d4af37;
+                            border-bottom: 4px solid #d4af37;
+                            margin-bottom: 25px;
+                        }
+                        .box-content { border: 1px solid #ccc; padding: 20px; border-radius: 8px; margin-bottom: 20px; background: #f9f9f9; }
                         @media print { .no-print { display: none; } }
                     </style>
                 </head>
                 <body>
                     <div class="container">
-                        <div class="header-box text-center">
-                            <h3>DHIYA KERALA AYURVEDA PANCHAKARMA VAIDHYASALAI</h3>
-                            <p class="mb-1 text-muted small">Govt Reg No: TVMIAYU20260042869 | Polur & Vengikkal</p>
-                            <h4 class="text-success mt-3">நோயாளி ஒப்புதல் படிவம் (Patient Consent Form)</h4>
+                        <!-- Premium Header for Consent Form -->
+                        <div class="print-header text-center">
+                            <h3 class="fw-bold mb-1" style="font-size: 1.3rem; color: #ffffff;">
+                                தியா கேரளா ஆயுர்வேதா பஞ்சகர்ம வைத்தியசாலை <span class="small text-warning">| Dhiya Kerala Ayurveda</span>
+                            </h3>
+                            <p class="mb-1 fw-bold text-warning small">அரசு பதிவு எண் / Govt Reg number: TVMIAYU20260042869</p>
+                            <p class="mb-1 text-light small">Traditional Kerala Ayurveda | Panchakarma | Varma | Physiotherapy</p>
+                            <p class="mb-1 text-light fst-italic small">"Healing Through Authentic Ayurveda & Compassionate Care"</p>
+                            <div class="mt-2 pt-2 border-top border-light small text-light">
+                                <strong>Main Hospital:</strong> Polur (04181) | <strong>Branch:</strong> Vengikkal, Tiruvannamalai | <strong>Contact:</strong> 9710703855
+                            </div>
                         </div>
+
+                        <h4 class="text-success text-center mb-4 fw-bold">${selectedFormTitle}</h4>
+                        
                         <div class="box-content">
                             <p><strong>நோயாளி பெயர் (Patient Name):</strong> ${pName}</p>
                             <p><strong>வயது / பாலினம் (Age / Gender):</strong> ${pAge} / ${pGender}</p>
                             <p><strong>மொபைல் எண் (Mobile):</strong> ${pPhone}</p>
                             <p><strong>மருத்துவர் (Consulting Doctor):</strong> ${pDoc}</p>
                             <hr>
-                            <p class="mt-3">நான் மேற்கண்ட தியா கேரளா ஆயுர்வேதா மருத்துவமனையில் எனது முழு விருப்பத்தின் பேரில் பஞ்சகர்ம மற்றும் ஆயுவேத சிகிச்சைகளை மேற்கொள்ள சம்மதிக்கிறேன். சிகிச்சையின் வழிமுறைகள் எனக்கு விளக்கப்பட்டுள்ளது.</p>
+                            <p class="mt-3">நான் மேற்கண்ட தியா கேரளா ஆயுர்வேதா மருத்துவமனையில் எனது முழு விருப்பத்தின் பேரில் இந்தச் சிகிச்சையை (<strong>${selectedFormTitle}</strong>) மேற்கொள்ள முழு சம்மதம் தெரிவிக்கிறேன். சிகிச்சையின் வழிமுறைகள் மற்றும் முறைகள் எனக்கு விளக்கப்பட்டுள்ளது.</p>
                         </div>
                         <div class="row mt-5">
                             <div class="col-6">
@@ -302,7 +325,7 @@
                             </div>
                         </div>
                         <div class="text-center mt-5 no-print">
-                            <button onclick="window.print()" class="btn btn-success px-4 py-2">இப்போது பிரின்ட் எடுக்கவும் (Print Form)</button>
+                            <button onclick="window.print()" class="btn btn-success px-4 py-2 fw-bold">இப்போது பிரின்ட் எடுக்கவும் (Print Form)</button>
                         </div>
                     </div>
                 </body>
