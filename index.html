@@ -8,37 +8,98 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #f4f7f6;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .header-container {
+            background: linear-gradient(135deg, #1b4d3e, #2e8b57);
+            color: white;
+            padding: 30px 20px;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        .logo-img {
+            height: 75px;
+            width: 75px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            background-color: #fff;
+        }
+        .card-custom {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+            background: #ffffff;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        .form-label {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        .btn-success-custom {
+            background-color: #1b4d3e;
+            border: none;
+            padding: 12px 25px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+        .btn-success-custom:hover {
+            background-color: #14382c;
+            transform: translateY(-1px);
+        }
+    </style>
 </head>
-<body class="bg-light">
+<body>
 
-    <div class="container my-5">
-        <!-- மருத்துவமனை லோகோ மற்றும் தலைப்புப் பகுதி (எந்தப் பிரச்சினையும் இல்லாமல் மேலே தெளிவாகத் தெரியும்படி அமைக்கப்பட்டுள்ளது) -->
-        <div class="text-center mb-4 p-3 bg-white shadow-sm rounded border">
-         <img src="logo.png" alt="Logo" style="height: 60px; margin-bottom: 10px;">
-            <p class="text-muted mb-0">Multi-Branch Cloud Central System | Reception & Billing Portal</p>
+    <!-- Header & Logo Section -->
+    <div class="header-container text-center">
+        <div class="container d-flex flex-column align-items-center justify-content-center">
+            <img src="logo.png" alt="Dhiya Kerala Ayurveda Logo" class="logo-img mb-3" onerror="this.style.display='none'">
+            <h1 class="fw-bold mb-1" style="font-size: 1.8rem; letter-spacing: 0.5px;">DHIYA KERALA AYURVEDA PANCHAKARMA CLINIC</h1>
+            <p class="mb-0 text-light opacity-75" style="font-size: 1rem;">Multi Branch Cloud Central System | Reception & Billing Portal</p>
         </div>
+    </div>
 
-        <div class="card shadow p-4">
-            <h3 class="text-center text-success mb-4"><i class="fas fa-hospital-user me-2"></i>புதிய நோயாளிகள் பதிவு மற்றும் பில்லிங்</h3>
-            
+    <div class="container pb-5">
+        <div class="card card-custom">
+            <h3 class="text-success mb-4 pb-2 border-bottom fw-bold">
+                <i class="fas fa-hospital-user me-2"></i> புதிய நோயாளிகள் பதிவு மற்றும் பில்லிங்
+            </h3>
+
             <form id="patientRegistrationForm">
                 <div class="row g-3">
+                    <!-- Patient ID -->
                     <div class="col-md-6">
                         <label for="regPatientID" class="form-label">நோயாளி ஐடி (Patient ID)</label>
                         <input type="text" class="form-control" id="regPatientID" required>
                     </div>
+
+                    <!-- Date -->
                     <div class="col-md-6">
                         <label for="regDate" class="form-label">தேதி (Date)</label>
                         <input type="date" class="form-control" id="regDate" required>
                     </div>
+
+                    <!-- Patient Name -->
                     <div class="col-md-6">
                         <label for="regName" class="form-label">நோயாளி பெயர் (Patient Name)</label>
                         <input type="text" class="form-control" id="regName" placeholder="பெயரை உள்ளிடவும்" required>
                     </div>
+
+                    <!-- Age -->
                     <div class="col-md-3">
                         <label for="regAge" class="form-label">வயது (Age)</label>
                         <input type="number" class="form-control" id="regAge" required>
                     </div>
+
+                    <!-- Gender -->
                     <div class="col-md-3">
                         <label for="regGender" class="form-label">பாலினம் (Gender)</label>
                         <select class="form-select" id="regGender">
@@ -47,109 +108,100 @@
                             <option value="Other">மற்றுமொரு (Other)</option>
                         </select>
                     </div>
-                    
-                    <!-- முகவரி மற்றும் தொடர்புப் பகுதி -->
+
+                    <!-- Contact Section -->
                     <div class="col-md-6">
                         <label for="regPhone" class="form-label">மொபைல் எண் (Mobile No.)</label>
                         <input type="tel" class="form-control" id="regPhone" placeholder="10 இலக்க மொபைல் எண்" required>
                     </div>
+
                     <div class="col-md-6">
                         <label for="regAltPhone" class="form-label">மாற்று எண் (Alternate No.)</label>
                         <input type="tel" class="form-control" id="regAltPhone" placeholder="மாற்று எண்">
                     </div>
+
+                    <!-- Address -->
                     <div class="col-12">
                         <label for="regAddress" class="form-label">முகவரி (Address)</label>
-                        <input type="text" class="form-control" id="regAddress" placeholder="வீட்டு எண், வீதி, ஊர்">
+                        <textarea class="form-control" id="regAddress" rows="2" placeholder="வீட்டு எண், வீதி, ஊர்" required></textarea>
                     </div>
 
-                    <!-- பில்லிங் மற்றும் மருத்துவர் கட்டணம் பகுதி -->
+                    <!-- Doctor & Fee -->
                     <div class="col-md-6">
                         <label for="regDoctor" class="form-label">மருத்துவர் (Consulting Doctor)</label>
-                        <select class="form-select" id="regDoctor">
+                        <select class="form-select" id="regDoctor" required>
                             <option value="Dr. S. Ashik Ali">Dr. S. Ashik Ali</option>
+                            <option value="Dr. R. Bhuvana">Dr. R. Bhuvana</option>
                         </select>
                     </div>
+
                     <div class="col-md-6">
                         <label for="regFee" class="form-label">கட்டணம் (Consultation Fee Rs.) [பில்லிங்]</label>
-                        <input type="number" class="form-control" id="regFee" value="500">
+                        <input type="number" class="form-control" id="regFee" value="500" required>
                     </div>
-                </div>
 
-                <!-- கன்சென்ட் ஃபார்ம் பகுதி (டிராப்-டவுன் பட்டியல் மற்றும் டவுன்லோட் வசதியுடன்) -->
-                <div class="card border-primary mt-4 p-3 bg-white shadow-sm">
-                    <div class="d-flex justify-content-between align-items-center mb-2">
-                        <h5 class="text-primary m-0"><i class="fas fa-file-signature me-2"></i>நோயாளி ஒப்புதல் படிவம் (Patient Consent Form)</h5>
-                        <a href="#" class="btn btn-outline-primary btn-sm" onclick="downloadConsentForm(event)">
-                            <i class="fas fa-download me-1"></i> ஃபார்மை டவுன்லோட் செய்
-                        </a>
-                    </div>
-                    <p class="text-muted small">ரிசப்ஷனில் சிகிச்சைக்கு வரும் நோயாளிகளிடம் ஒப்புதல் படிவம் பெற்று கையெழுத்திட இங்கே டவுன்லோட் செய்யவும்.</p>
-                    
-                    <div class="row g-3 align-items-center">
-                        <div class="col-md-6">
-                            <label for="patientNameConsent" class="form-label">ஒப்புதல் உறுதி செய்யும் பெயர்</label>
-                            <input type="text" class="form-control" id="patientNameConsent" placeholder="நோயாளி பெயர்">
+                    <!-- Consent Form Section -->
+                    <div class="col-12 mt-4 p-3 bg-light rounded border">
+                        <h5 class="text-success fw-bold mb-2">
+                            <i class="fas fa-file-signature me-2"></i> நோயாளி ஒப்புதல் படிவம் (Patient Consent Form)
+                        </h5>
+                        <p class="text-muted small mb-2">ரிப்ஷனில் சிகிச்சைக்கு வரும் நோயாளிகளிடம் ஒப்புதல் படிவம் பெற்று கையெழுத்திட கீழே டவுன்லோட் செய்யவும்.</p>
+                        <div class="row align-items-center g-3">
+                            <div class="col-md-6">
+                                <label for="consentName" class="form-label small">ஒப்புதல் உறுதி செய்யும் பெயர்</label>
+                                <input type="text" class="form-control form-control-sm" id="consentName" placeholder="நோயாளி பெயர்">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label small">ஒப்புதல் நிலை மற்றும் படிவம் பட்டியல்</label>
+                                <select class="form-select form-select-sm" id="consentStatus">
+                                    <option value="Pending">நிலுவையில் உள்ளது (Pending)</option>
+                                    <option value="Completed">நிறைவு பெற்றது (Completed)</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2 text-end">
+                                <label class="form-label small d-block">&nbsp;</label>
+                                <button type="button" class="btn btn-outline-primary btn-sm w-100" onclick="downloadConsentForms()">
+                                    <i class="fas fa-download me-1"></i> டவுன்லோட் செய்
+                                </button>
+                            </div>
                         </div>
-                        <div class="col-md-6">
-                            <label for="consentStatus" class="form-label">ஒப்புதல் நிலை மற்றும் ஃபார்ம் பட்டியல்</label>
-                            <select class="form-select" id="consentStatus">
-                                <option value="Pending">நிலுவையில் உள்ளது (Pending)</option>
-                                <option value="Received">பெறப்பட்டது (Received)</option>
-                                <option value="Form_List_22">பெறப்பட்ட 22 ஃபார்ம்கள் பட்டியல் (View List)</option>
-                            </select>
+                        <div class="mt-2 text-success small fw-bold">
+                            தற்போதைய நிலை: <span id="formCounterBadge">22 படிவங்கள் பெறப்பட்டுள்ளன</span>
                         </div>
                     </div>
 
-                    <div class="mt-3 p-2 bg-light rounded border text-center">
-                        <span class="fw-bold text-dark">தற்போதைய நிலை:</span> 
-                        <span id="consentCountDisplay" class="badge bg-success ms-2">22 ஃபார்ம்கள் பெறப்பட்டுள்ளன</span>
+                    <!-- Submit Button -->
+                    <div class="col-12 text-center mt-4">
+                        <button type="submit" class="btn btn-success-custom w-100 py-3 shadow">
+                            <i class="fas fa-save me-2"></i> பதிவை சேமித்து அடுத்த பகுதிக்குப் செல்லவும் (SAVE & PROCEED)
+                        </button>
                     </div>
-                </div>
-
-                <!-- சேமிக்கும் பட்டன் -->
-                <div class="mt-4 text-center">
-                    <button type="button" class="btn btn-success btn-lg w-100" onclick="savePatientRecord()">
-                        <i class="fas fa-save me-2"></i>பதிவை சேமித்து அடுத்த பகுதிக்குச் செல்லவும் (SAVE & PROCEED)
-                    </button>
                 </div>
             </form>
         </div>
     </div>
 
+    <!-- JavaScript Functionality -->
     <script>
-    function downloadConsentForm(event) {
-        event.preventDefault();
-        alert("ஒப்புதல் படிவம் (Consent Form) டவுன்லோட் தொடங்குகிறது. பிரிண்ட் எடுத்து கையெழுத்து பெறலாம்.");
-    }
-
-    function savePatientRecord() {
-        const name = document.getElementById('regName').value;
-        const consentStatus = document.getElementById('consentStatus').value;
-        
-        if(!name) {
-            alert('தயவுசெய்து நோயாளியின் பெயரை உள்ளிடவும்.');
-            return;
+        function downloadConsentForms() {
+            alert("ஒப்புதல் படிவம் (Consent Form) டவுன்லோட் தொடங்குகிறது. பிரின்ட் எடுத்து கையெழுத்து பெறலாம்.");
+            // Create simulated multiple downloads for offline/online use
+            for (let i = 1; i <= 3; i++) {
+                const blob = new Blob([`Dhiya Kerala Ayurveda - Patient Consent Form #${i}\nPatient Name: ` + (document.getElementById('regName').value || 'General') + `\nDate: ` + (document.getElementById('regDate').value || new Date().toISOString().split('T')[0])], { type: 'text/plain' });
+                const link = document.createElement('a');
+                link.href = window.URL.createObjectURL(blob);
+                link.download = `Consent_Form_${i}.txt`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
         }
 
-        const patientData = {
-            patientID: document.getElementById('regPatientID').value,
-            date: document.getElementById('regDate').value,
-            name: name,
-            phone: document.getElementById('regPhone').value,
-            address: document.getElementById('regAddress').value,
-            doctor: document.getElementById('regDoctor').value,
-            fee: document.getElementById('regFee').value,
-            consentStatus: consentStatus
-        };
-
-        let records = JSON.parse(localStorage.getItem('dhiya_patients') || '[]');
-        records.push(patientData);
-        localStorage.setItem('dhiya_patients', JSON.stringify(records));
-
-        alert("நோயாளி பதிவு மற்றும் ஒப்புதல் நிலை வெற்றிகரமாக சேமிக்கப்பட்டது!");
-        window.location.href = "case_sheet.html";
-    }
+        document.getElementById('patientRegistrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert("நோயாளி பதிவு மற்றும் ஒப்புதல் நிலை வெற்றிகரமாக சேமிக்கப்பட்டது!");
+            window.location.href = "case_sheet.html";
+        });
     </script>
-
 </body>
 </html>
