@@ -16,24 +16,30 @@
         .header-container {
             background: linear-gradient(135deg, #12382c, #1b4d3e, #2e8b57);
             color: white;
-            padding: 30px 20px;
+            padding: 25px 20px;
             border-radius: 0 0 25px 25px;
             box-shadow: 0 6px 25px rgba(0,0,0,0.2);
             margin-bottom: 30px;
-            border-bottom: 3px solid #d4af37; /* Premium Gold Line */
+            border-left: 4px solid #d4af37;
+            border-right: 4px solid #d4af37;
+            border-bottom: 4px solid #d4af37;
         }
         .logo-box {
             background: #ffffff;
             padding: 6px;
             border-radius: 12px;
-            display: inline-block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            border: 2px solid #d4af37; /* Gold Border for Logo */
+            border: 2px solid #d4af37;
+            height: 100%;
+            min-height: 180px;
         }
         .logo-img {
-            height: 100px;
-            width: 100px;
-            object-fit: contain; /* Prevents cutting of circular logo */
+            width: 100%;
+            max-height: 170px;
+            object-fit: contain;
             border-radius: 8px;
             display: block;
             background-color: #ffffff;
@@ -54,7 +60,7 @@
         .btn-success-custom {
             background-color: #1b4d3e;
             border: none;
-            padding: 12px 25px;
+            padding: 14px 25px;
             font-weight: 600;
             letter-spacing: 0.5px;
             transition: all 0.3s ease;
@@ -68,47 +74,73 @@
             background: rgba(0, 0, 0, 0.2);
             padding: 12px 15px;
             border-radius: 10px;
-            margin-top: 15px;
+            margin-top: 12px;
             line-height: 1.5;
-            border-left: 3px solid #d4af37; /* Gold Accent Line */
+            border-left: 3px solid #d4af37;
+            border-right: 3px solid #d4af37;
+        }
+        .doctor-badge {
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px dashed #d4af37;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            margin-top: 5px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Header & Logo Section (Square Gold-Border Box & Premium Look) -->
+    <!-- Header & Logo Section (Bilingual & Full Height Match) -->
     <div class="header-container">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row align-items-center">
-                <!-- Left Column: Square Box with Logo inside -->
-                <div class="col-md-2 text-center text-md-center mb-3 mb-md-0">
+                <div class="col-md-2 text-center mb-3 mb-md-0">
                     <div class="logo-box">
                         <img src="logo.png" alt="Dhiya Kerala Ayurveda Logo" class="logo-img" onerror="this.style.display='none'">
                     </div>
                 </div>
                 
-                <!-- Right Column: Details aligned with 4-line height & Gold accents -->
                 <div class="col-md-10 text-center text-md-start">
-                    <h1 class="fw-bold mb-1" style="font-size: 1.6rem; letter-spacing: 0.5px; color: #ffffff;">Dhiya Kerala Ayurveda Panchakarma Vaidhyasalai</h1>
-                    <p class="mb-1 fw-bold" style="font-size: 0.95rem; color: #f3d482; letter-spacing: 0.5px;">Govt Reg number: TVMIAYU20260042869</p>
+                    <h1 class="fw-bold mb-1" style="font-size: 1.5rem; letter-spacing: 0.5px; color: #ffffff;">
+                        தியா கேரளா ஆயுர்வேதா பஞ்சகர்ம வைத்தியசாலை <span class="small text-warning" style="font-size: 1rem;">| Dhiya Kerala Ayurveda Panchakarma Vaidhyasalai</span>
+                    </h1>
+                    <p class="mb-1 fw-bold" style="font-size: 0.9rem; color: #f3d482; letter-spacing: 0.5px;">
+                        அரசு பதிவு எண் / Govt Reg number: TVMIAYU20260042869
+                    </p>
                     
                     <p class="mb-1 text-light small fw-semibold" style="letter-spacing: 0.3px;">
-                        Traditional Kerala Ayurveda | Panchakarma | Varma Chikitsa | Agnikarma | Physiotherapy | Ayurveda Cosmetology
+                        பாரம்பரிய கேரளா ஆயுர்வேதா | பஞ்சகர்மா | வர்ம மருத்துவம் | அக்னிகர்மா | பிசியோதெரபி | ஆயுர்வேத அழகுக்கலை <br>
+                        <span class="fst-italic text-warning">Traditional Kerala Ayurveda | Panchakarma | Varma Chikitsa | Agnikarma | Physiotherapy | Ayurveda Cosmetology</span>
                     </p>
-                    <p class="mb-2 text-light fst-italic small">"Healing Through Authentic Ayurveda & Compassionate Care"</p>
 
-                    <!-- Addresses & Contact Box with Gold Accent -->
+                    <!-- Doctors Info Box -->
+                    <div class="doctor-badge text-light">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <strong>1. Dr. S. Ashik Ali, B.A.M.S, M.B.A. (Hospital Mgmt), D.P.T, F.M.C.</strong><br>
+                                <span class="text-warning">Govt Reg no: 0124</span>
+                            </div>
+                            <div class="col-md-6 mt-2 mt-md-0">
+                                <strong>2. Dr. R. Puvana, B.A.M.S, M.B.A. (Hospital Mgmt), Msc (Yoga & Naturopathy), P.G.D.A.C. (UK), F.M.C.</strong><br>
+                                <span class="text-warning">Govt Reg no: 0162</span>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="hospital-info text-light">
                         <div class="row">
                             <div class="col-md-6 mb-1 mb-md-0">
-                                <strong><i class="fas fa-hospital me-1" style="color: #f3d482;"></i> Main Hospital:</strong> No.39, Diversion Road, Polur, Tiruvannamalai - 606803.
+                                <strong><i class="fas fa-hospital me-1" style="color: #f3d482;"></i> தலைமை மருத்துவமனை / Main Hospital:</strong> எண் 39, டைவர்சன் ரோடு, போளூர், திருவண்ணாமலை - 606803.<br>
+                                <small class="text-muted">No.39, Diversion Road, Polur, Tiruvannamalai - 606803.</small>
                             </div>
                             <div class="col-md-6">
-                                <strong><i class="fas fa-code-branch me-1" style="color: #f3d482;"></i> Branch:</strong> No. 732-B, 3rd Street, Vengikkal, Tiruvannamalai - 606604.
+                                <strong><i class="fas fa-code-branch me-1" style="color: #f3d482;"></i> கிளை மருத்துவமனை / Branch:</strong> எண் 732-B, 3வது தெரு, வெங்குக்கல், திருவண்ணாமலை - 606604.<br>
+                                <small class="text-muted">No. 732-B, 3rd Street, Vengikkal, Tiruvannamalai - 606604.</small>
                             </div>
                         </div>
                         <div class="mt-2 text-center border-top pt-1 border-light opacity-85">
-                            <strong><i class="fas fa-phone-alt me-1" style="color: #f3d482;"></i> Contact:</strong> 9710703855, 9171731744
+                            <strong><i class="fas fa-phone-alt me-1" style="color: #f3d482;"></i> தொலைபேசி / Contact:</strong> 9710703855, 9171731744
                         </div>
                     </div>
                 </div>
@@ -116,39 +148,35 @@
         </div>
     </div>
 
+    <!-- Main Content Form Section -->
     <div class="container pb-5">
         <div class="card card-custom">
             <h3 class="text-success mb-4 pb-2 border-bottom fw-bold">
-                <i class="fas fa-hospital-user me-2"></i> புதிய நோயாளிகள் பதிவு மற்றும் பில்லிங்
+                <i class="fas fa-hospital-user me-2"></i> புதிய நோயாளிகள் பதிவு மற்றும் பில்லிங் / Patient Registration & Billing
             </h3>
 
             <form id="patientRegistrationForm">
                 <div class="row g-3">
-                    <!-- Patient ID -->
                     <div class="col-md-6">
                         <label for="regPatientID" class="form-label">நோயாளி ஐடி (Patient ID)</label>
                         <input type="text" class="form-control" id="regPatientID" required>
                     </div>
 
-                    <!-- Date -->
                     <div class="col-md-6">
                         <label for="regDate" class="form-label">தேதி (Date)</label>
                         <input type="date" class="form-control" id="regDate" required>
                     </div>
 
-                    <!-- Patient Name -->
                     <div class="col-md-6">
                         <label for="regName" class="form-label">நோயாளி பெயர் (Patient Name)</label>
                         <input type="text" class="form-control" id="regName" placeholder="பெயரை உள்ளிடவும்" required>
                     </div>
 
-                    <!-- Age -->
                     <div class="col-md-3">
                         <label for="regAge" class="form-label">வயது (Age)</label>
                         <input type="number" class="form-control" id="regAge" required>
                     </div>
 
-                    <!-- Gender -->
                     <div class="col-md-3">
                         <label for="regGender" class="form-label">பாலினம் (Gender)</label>
                         <select class="form-select" id="regGender">
@@ -158,7 +186,6 @@
                         </select>
                     </div>
 
-                    <!-- Contact Section -->
                     <div class="col-md-6">
                         <label for="regPhone" class="form-label">மொபைல் எண் (Mobile No.)</label>
                         <input type="tel" class="form-control" id="regPhone" placeholder="10 இலக்க மொபைல் எண்" required>
@@ -169,18 +196,16 @@
                         <input type="tel" class="form-control" id="regAltPhone" placeholder="மாற்று எண்">
                     </div>
 
-                    <!-- Address -->
                     <div class="col-12">
                         <label for="regAddress" class="form-label">முகவரி (Address)</label>
                         <textarea class="form-control" id="regAddress" rows="2" placeholder="வீட்டு எண், வீதி, ஊர்" required></textarea>
                     </div>
 
-                    <!-- Doctor & Fee -->
                     <div class="col-md-6">
                         <label for="regDoctor" class="form-label">மருத்துவர் (Consulting Doctor)</label>
                         <select class="form-select" id="regDoctor" required>
-                            <option value="Dr. S. Ashik Ali">Dr. S. Ashik Ali</option>
-                            <option value="Dr. R. Bhuvana">Dr. R. Puvana</option>
+                            <option value="Dr. S. Ashik Ali">Dr. S. Ashik Ali, B.A.M.S, M.B.A.(Hosp Mgmt), D.P.T, F.M.C.</option>
+                            <option value="Dr. R. Puvana">Dr. R. Puvana, B.A.M.S, M.B.A.(Hosp Mgmt), Msc(Yoga & Nat), P.G.D.A.C.(U.K), F.M.C.</option>
                         </select>
                     </div>
 
@@ -189,19 +214,19 @@
                         <input type="number" class="form-control" id="regFee" value="500" required>
                     </div>
 
-                    <!-- Consent Form Section -->
+                    <!-- 20 Consent Forms & Print Section -->
                     <div class="col-12 mt-4 p-3 bg-light rounded border">
                         <h5 class="text-success fw-bold mb-2">
-                            <i class="fas fa-file-signature me-2"></i> நோயாளி ஒப்புதல் படிவம் (Patient Consent Form)
+                            <i class="fas fa-file-signature me-2"></i> நோயாளி ஒப்புதல் படிவம் (Patient Consent Forms)
                         </h5>
-                        <p class="text-muted small mb-2">ரிப்ஷனில் சிகிச்சைக்கு வரும் நோயாளிகளிடம் ஒப்புதல் படிவம் பெற்று கையெழுத்திட கீழே டவுன்லோட் செய்யவும்.</p>
+                        <p class="text-muted small mb-2">ரிப்ஷனில் சிகிச்சைக்கு வரும் நோயாளிகளிடம் ஒப்புதல் படிவம் பெற்று கையெழுத்திட கீழே கிளிக் செய்யவும்.</p>
                         <div class="row align-items-center g-3">
                             <div class="col-md-6">
                                 <label for="consentName" class="form-label small">ஒப்புதல் உறுதி செய்யும் பெயர்</label>
                                 <input type="text" class="form-control form-control-sm" id="consentName" placeholder="நோயாளி பெயர்">
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label small">ஒப்புதல் நிலை மற்றும் படிவம் பட்டியல்</label>
+                                <label class="form-label small">படிவங்களின் நிலை (Consent Status)</label>
                                 <select class="form-select form-select-sm" id="consentStatus">
                                     <option value="Pending">நிலுவையில் உள்ளது (Pending)</option>
                                     <option value="Completed">நிறைவு பெற்றது (Completed)</option>
@@ -209,20 +234,20 @@
                             </div>
                             <div class="col-md-2 text-end">
                                 <label class="form-label small d-block">&nbsp;</label>
-                                <button type="button" class="btn btn-outline-primary btn-sm w-100" onclick="downloadConsentForms()">
-                                    <i class="fas fa-download me-1"></i> டவுன்லோட் செய்
+                                <button type="button" class="btn btn-outline-primary btn-sm w-100" onclick="openPrintableConsent()">
+                                    <i class="fas fa-print me-1"></i> பார்ம் / பிரின்ட்
                                 </button>
                             </div>
                         </div>
                         <div class="mt-2 text-success small fw-bold">
-                            தற்போதைய நிலை: <span id="formCounterBadge">22 படிவங்கள் பெறப்பட்டுள்ளன</span>
+                            அனைத்துச் சேமிக்கப்பட்டவை: <span id="formCounterBadge">20 கன்சென்ட் ஃபார்ம்கள் தயாராக உள்ளன (20 Consent Forms Available)</span>
                         </div>
                     </div>
 
-                    <!-- Submit Button -->
+                    <!-- Save & Next Page (Goes to Doctor Prescription / Case Sheet) -->
                     <div class="col-12 text-center mt-4">
-                        <button type="submit" class="btn btn-header btn-success-custom w-100 py-3 shadow">
-                            <i class="fas fa-save me-2"></i> பதிவை சேமித்து அடுத்த பகுதிக்குப் செல்லவும் (SAVE & PROCEED)
+                        <button type="submit" class="btn btn-success-custom w-100 py-3 shadow">
+                            <i class="fas fa-stethoscope me-2"></i> சேமித்து டாக்டர் பிரஸ்கிரிப்ஷன் / கேஸ் ஷீட்டுக்குச் செல்லவும் (SAVE & NEXT PAGE)
                         </button>
                     </div>
                 </div>
@@ -232,22 +257,64 @@
 
     <!-- JavaScript Functionality -->
     <script>
-        function downloadConsentForms() {
-            alert("ஒப்புதல் படிவம் (Consent Form) டவுன்லோட் தொடங்குகிறது.");
-            for (let i = 1; i <= 3; i++) {
-                const blob = new Blob([`Dhiya Kerala Ayurveda - Consent Form #${i}\nPatient: ` + (document.getElementById('regName').value || 'General')], { type: 'text/plain' });
-                const link = document.createElement('a');
-                link.href = window.URL.createObjectURL(blob);
-                link.download = `Consent_Form_${i}.txt`;
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            }
+        function openPrintableConsent() {
+            const pName = document.getElementById('regName').value || 'மதிப்பிற்குரிய நோயாளி';
+            const pAge = document.getElementById('regAge').value || '-';
+            const pGender = document.getElementById('regGender').value || '-';
+            const pPhone = document.getElementById('regPhone').value || '-';
+            const pDoc = document.getElementById('regDoctor').value || '-';
+
+            // Opens a new professional printable window for Consent Form
+            let printWindow = window.open('', '_blank');
+            printWindow.document.write(`
+                <html>
+                <head>
+                    <title>Patient Consent Form - Dhiya Kerala Ayurveda</title>
+                    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+                    <style>
+                        body { font-family: 'Segoe UI', Tahoma, sans-serif; padding: 30px; color: #333; }
+                        .header-box { border-bottom: 2px solid #1b4d3e; padding-bottom: 15px; margin-bottom: 25px; }
+                        .box-content { border: 1px solid #ccc; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+                        @media print { .no-print { display: none; } }
+                    </style>
+                </head>
+                <body>
+                    <div class="container">
+                        <div class="header-box text-center">
+                            <h3>DHIYA KERALA AYURVEDA PANCHAKARMA VAIDHYASALAI</h3>
+                            <p class="mb-1 text-muted small">Govt Reg No: TVMIAYU20260042869 | Polur & Vengikkal</p>
+                            <h4 class="text-success mt-3">நோயாளி ஒப்புதல் படிவம் (Patient Consent Form)</h4>
+                        </div>
+                        <div class="box-content">
+                            <p><strong>நோயாளி பெயர் (Patient Name):</strong> ${pName}</p>
+                            <p><strong>வயது / பாலினம் (Age / Gender):</strong> ${pAge} / ${pGender}</p>
+                            <p><strong>மொபைல் எண் (Mobile):</strong> ${pPhone}</p>
+                            <p><strong>மருத்துவர் (Consulting Doctor):</strong> ${pDoc}</p>
+                            <hr>
+                            <p class="mt-3">நான் மேற்கண்ட தியா கேரளா ஆயுர்வேதா மருத்துவமனையில் எனது முழு விருப்பத்தின் பேரில் பஞ்சகர்ம மற்றும் ஆயுவேத சிகிச்சைகளை மேற்கொள்ள சம்மதிக்கிறேன். சிகிச்சையின் வழிமுறைகள் எனக்கு விளக்கப்பட்டுள்ளது.</p>
+                        </div>
+                        <div class="row mt-5">
+                            <div class="col-6">
+                                <p class="mt-4">___________________________<br><strong>நோயாளி / உறவினர் கையெழுத்து</strong></p>
+                            </div>
+                            <div class="col-6 text-end">
+                                <p class="mt-4">___________________________<br><strong>மருத்துவர் / ரிசப்ஷன் கையெழுத்து</strong></p>
+                            </div>
+                        </div>
+                        <div class="text-center mt-5 no-print">
+                            <button onclick="window.print()" class="btn btn-success px-4 py-2">இப்போது பிரின்ட் எடுக்கவும் (Print Form)</button>
+                        </div>
+                    </div>
+                </body>
+                </html>
+            `);
+            printWindow.document.close();
         }
 
+        // Save & Proceed to Next Page (Doctor Prescription / Case Sheet)
         document.getElementById('patientRegistrationForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            alert("நோயாளி பதிவு வெற்றிகரமாக சேமிக்கப்பட்டது!");
+            alert("பதிவு வெற்றிகரமாகச் சேமிக்கப்பட்டது! இப்போது டாக்டர் பிரஸ்கிரிப்ஷன் (Case Sheet) பகுதிக்குச் செல்கிறது.");
             window.location.href = "case_sheet.html";
         });
     </script>
