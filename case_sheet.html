@@ -330,24 +330,35 @@
         const symptomsBox = document.getElementById('autoSymptoms');
         const medsBox = document.getElementById('autoMedicines');
         const dietBox = document.getElementById('dietChartBox');
-        const lang = document.getElementById('langSelect').value;
+       const lang = document.getElementById('langSelect').value;
 
-        if (!val) {
-            symptomsBox.value = "";
-            medsBox.value = "";
-            dietBox.value = "";
-            return;
-        }
+    if (!val) {
+        symptomsBox.value = "";
+        medsBox.value = "";
+        dietBox.value = "";
+        return;
+    }
 
-        let symptoms = "Severe local pain, stiffness, restricted movement, aggravated by physical strain.";
-        let meds = "Classical Ayurvedic Kashayam, Tailam, and Guggulu formulations.";
-        let dietTa = "உணவு முறை (" + val + "): எளிதில் செரிமானமாகும் சூடான உணவுகள், சீரகத் தண்ணீர் மற்றும் மோர் சேர்த்துக்கொள்ளவும். குளிரான மற்றும் வதக்கிய எண்ணெய் உணவுகளைத் தவிர்க்கவும்.";
-        let dietEn = "Diet for " + val + ": Warm water intake, easily digestible foods, buttermilk, garlic. Avoid cold and fried items.";
+    let symptoms = "Severe local pain, stiffness, restricted movement, aggravated by physical strain.";
+    let meds = "Classical Ayurvedic Kashayam, Tailam, and Guggulu formulations.";
+    let dietText = "";
 
-        if (val.includes('spondylosis') || val.includes('Sciatica') || val.includes('spur') || val.includes('Gout') || val.includes('Osteoarthritis')) {
-            symptoms = "Localized joint/spine pain, radiating discomfort, morning stiffness, swelling.";
-            meds = "Sahacharadi Kashayam, Kottamchukkadi Tailam, Rasnadi Guggulu, Yogaraja Guggulu";
-        } else if (val.includes('Psoriasis') || val.includes('Eczema') || val.includes('Acne')) {
+    // Language based diet instruction logic
+    if (lang === 'ta') {
+        dietText = "உணவு முறை (" + val + "): எளிதில் செரிமானமாகும் சூடான உணவுகள், சீரகத் தண்ணீர்.";
+    } else if (lang === 'ml') {
+        dietText = "ആഹാരക്രമം (" + val + "): ദഹിക്കാൻ എളുപ്പമുള്ള ചൂടുള്ള ഭക്ഷണങ്ങൾ, ജീരകവെള്ളം.";
+    } else if (lang === 'te') {
+        dietText = "ఆహారపు అలవాట్లు (" + val + "): సులభంగా జీర్ణమయ్యే వేడి ఆహారాలు, జీలకర్ర నీరు.";
+    } else if (lang === 'hi') {
+        dietText = "आहार नियम (" + val + "): आसानी से पचने वाला गर्म भोजन, जीरा पानी.";
+    } else if (lang === 'ka') {
+        dietText = "ಆಹಾರ ಕ್ರಮ (" + val + "): ಸುಲಭವಾಗಿ ಜೀರ್ಣವಾಗುವ ಬಿಸಿ ಆಹಾರ, ಜೀರಿಗೆ ನೀರು.";
+    } else {
+        dietText = "Diet for " + val + ": Warm water intake, easily digestible foods, buttermilk, garlic.";
+    }
+
+    dietBox.value = dietText;
             symptoms = "Skin lesions, severe itching, scaling, erythema, inflammatory patches.";
             meds = "Mahatiktaka Kashayam, Nimbadi Choornam, Eladi Tailam, Gandhak Rasayan";
         } else if (val.includes('Diabetes') || val.includes('Cholesterol') || val.includes('Obesity')) {
