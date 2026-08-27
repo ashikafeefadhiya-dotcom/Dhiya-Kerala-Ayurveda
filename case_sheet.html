@@ -28,7 +28,7 @@
         .header-right { text-align: right; font-size: 12px; color: #1F2937; line-height: 1.6; background: #F9FAFB; padding: 12px 18px; border-radius: 10px; border-left: 4px solid var(--accent); }
         
         .nav-bar { display: flex; justify-content: space-between; margin-bottom: 25px; }
-        .top-nav-btn { background: var(--accent); color: white; border: none; padding: 9px 18px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 12px; }
+        .top-nav-btn { background: var(--accent); color: white; border: none; padding: 9px 18px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 12px; text-decoration: none; display: inline-block; }
 
         section { background: #FCFCFD; border: 1px solid #E5E7EB; padding: 25px; border-radius: 12px; margin-bottom: 25px; }
         section h2 { font-size: 16px; color: var(--primary); margin-top: 0; border-bottom: 2px solid #E5E7EB; padding-bottom: 10px; }
@@ -45,6 +45,11 @@
         .btn-add { background: #059669; color: white; padding: 9px 16px; font-size: 13px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; }
         .btn-del { background: #DC2626; color: white; padding: 9px 12px; font-size: 13px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; }
         
+        /* WhatsApp Action Buttons Styling */
+        .whatsapp-bar { display: flex; gap: 12px; background: #ECFDF5; border: 1px solid #A7F3D0; padding: 16px; border-radius: 10px; margin-bottom: 25px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+        .wa-btn { background: #25D366; color: white; padding: 10px 18px; border-radius: 6px; font-weight: bold; text-decoration: none; font-size: 13px; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 2px 6px rgba(37,211,102,0.3); }
+        .wa-btn:hover { background: #1EBE5D; }
+
         .tariff-box { background: #F0FDF4; border: 1px solid #BBF7D0; padding: 18px; border-radius: 10px; margin-top: 18px; font-weight: bold; text-align: right; color: #166534; font-size: 17px; }
     </style>
 </head>
@@ -60,10 +65,9 @@
     <!-- Header with Logo and Correct Branch Address Switch -->
     <div class="header">
         <div class="header-left">
-            <div class="logo-container">
-                <img src="logo.png" alt="Logo" onerror="this.style.display='none';">
-        </div>
-
+           <div class="logo-box">
+            <img src="logo.png" alt="DKA Logo" onerror="this.style.display='none';">
+            </div>
             <div>
                 <h1>DHIYA KERALA AYURVEDA PANCHAKARMA VAIDHYASALAI</h1>
                 <div class="sub-text">
@@ -74,8 +78,27 @@
         </div>
         <div class="header-right" id="branchAddressBox">
             <strong>Main Branch (போளூர்):</strong> No.39, Diversion Road, Polur - 606803<br>
-            <strong>Branch (வேங்கிக்கால்):</strong> No.732-B,Min Nagar 3rd Street,Vengikkal, Tiruvannamalai<br>
+            <strong>Branch (வேங்கிக்கால்):</strong>No:732-B,Min Nagar3rd Street, Vengikkal, Tiruvannamalai<br>
             <strong>Phone:</strong> 91117 31744, 97107 03855
+        </div>
+    </div>
+
+    <!-- Quick WhatsApp Actions Bar for Reception -->
+    <div class="whatsapp-bar">
+        <div>
+            <strong style="color: #065F46; font-size: 14px;">📱 WhatsApp Quick Desk Actions:</strong>
+            <div style="font-size: 12px; color: #047857; margin-top: 2px;">நோயாளி வந்தவுடன் பதிவு செய்ய மற்றும் அப்பாயின்ட்மென்ட் ஒதுக்க:</div>
+        </div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <a href="https://wa.me/919111731744?text=Vanakkam,%20I%20want%20to%20register%20as%20a%20new%20patient%20at%20Dhiya%20Kerala%20Ayurveda." target="_blank" class="wa-btn">
+                📝 Register Here
+            </a>
+            <a href="https://wa.me/919111731744?text=Vanakkam,%20I%20would%20like%20to%20book%20an%20appointment%20with%20the%20doctor." target="_blank" class="wa-btn" style="background: #0284C7;">
+                📅 Book Appointment
+            </a>
+            <button type="button" class="wa-btn" style="background: #7C3AED; border:none; cursor:pointer;" onclick="sendNextVisitWhatsApp()">
+                ⏰ Send Next Visit Alert
+            </button>
         </div>
     </div>
 
@@ -86,15 +109,15 @@
             <div class="form-group" style="margin-bottom:0;">
                 <label>Select Branch (கிளை):</label>
                 <select id="branchSelect" onchange="updateHeaderBranch()">
-                    <option value="polur">No:39, Diversion RoadPolur Main Branch (போளூர்)</option>
-                    <option value="vengikkal">No:732-B,Min Nagar,3rd Street,Vengikkal (வேங்கிக்கால், திருவண்ணாமலை)</option>
+                    <option value="polur">Polur Main Branch (போளூர்)</option>
+                    <option value="vengikkal">Vengikkal Branch (வேங்கிக்கால், திருவண்ணாமலை)</option>
                 </select>
             </div>
             <div class="form-group" style="margin-bottom:0;">
                 <label>Attending Doctor (மருத்துவர் பெயர்):</label>
                 <select id="doctorSelect">
-                    <option value="Dr. S.Ashik Ali">Dr. S.Ashik Ali (Chief Ayurvedic Consultant)</option>
-                    <option value="Dr. R.Puvana">Dr. R.Puvana (Panchakarma Expert)</option>
+                    <option value="Dr. Senior Physician">Dr. Senior Physician (Chief Ayurvedic Consultant)</option>
+                    <option value="Dr. Specialist Doctor">Dr. Specialist Doctor (Panchakarma Expert)</option>
                 </select>
             </div>
         </div>
@@ -102,15 +125,25 @@
 
     <!-- Patient Information -->
     <section>
-        <h2>👤 Patient Information (நோயாளி விவரங்கள்)</h2>
+        <h2>👤 Patient Information & Next Visit Planning (நோயாளி விவரங்கள் & அடுத்த விசிட்)</h2>
         <div class="grid-2">
             <div class="form-group">
                 <label>Patient ID & Name (பெயர் / ஐடி):</label>
-                <input type="text" placeholder="Enter Patient ID or Name">
+                <input type="text" id="patientNameInput" placeholder="Enter Patient Name">
             </div>
             <div class="form-group">
-                <label>Age / Gender / Phone (வயது / பாலினம் / தொலைபேசி):</label>
-                <input type="text" placeholder="Ex: 45 / Male / 9876543210">
+                <label>Phone Number (வாட்ஸ்அப் எண் - Ex: 9876543210):</label>
+                <input type="text" id="patientPhoneInput" placeholder="Enter 10-digit Mobile Number">
+            </div>
+        </div>
+        <div class="grid-2" style="margin-top: 15px;">
+            <div class="form-group" style="margin-bottom:0;">
+                <label>Age / Gender (வயது / பாலினம்):</label>
+                <input type="text" placeholder="Ex: 45 / Male">
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+                <label>Next Visit Date (அடுத்த முறை வர வேண்டிய தேதி):</label>
+                <input type="date" id="nextVisitDate">
             </div>
         </div>
     </section>
@@ -361,7 +394,27 @@
         
         container.appendChild(newRow);
     }
+
+    function sendNextVisitWhatsApp() {
+        const name = document.getElementById('patientNameInput').value || "Patient";
+        const phone = document.getElementById('patientPhoneInput').value;
+        const nextDate = document.getElementById('nextVisitDate').value;
+
+        if (!phone) {
+            alert("தயவுசெய்து நோயாளியின் தொலைபேசி எண்ணை உள்ளிடவும்!");
+            return;
+        }
+
+        let message = `Vanakkam ${name}, உங்களது அடுத்த விசிட் தேதி: ${nextDate || 'தீர்மானிக்கப்படவில்லை'}. தங்களது சந்திப்பை உறுதி செய்ய இந்த எண்ணைத் தொடர்பு கொள்ளவும். - Dhiya Kerala Ayurveda`;
+        let encodedMessage = encodeURIComponent(message);
+        let whatsappUrl = `https://wa.me/91${phone}?text=${encodedMessage}`;
+        
+        window.open(whatsappUrl, '_blank');
+    }
 </script>
 
 </body>
 </html>
+```eof
+
+இப்போது ரிசப்ஷன் பகுதியில் நோயாளியின் போன் நம்பர் மற்றும் அடுத்த விசிட் தேதியைக் குறிப்பிட்டு **"Send Next Visit Alert"** பட்டனை அழுத்தினால், நேரடியாக அந்த நோயாளியின் வாட்ஸ்அப்பிற்குத் தேதி விவரங்களோடு குறுஞ்செய்தி சென்றுவிடும் ஐயா! வேறு என்ன மாற்றங்கள் செய்ய வேண்டும் என்று சொல்லுங்கள்.
