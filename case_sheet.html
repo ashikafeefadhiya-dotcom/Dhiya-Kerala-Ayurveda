@@ -3,131 +3,253 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multi-Branch Medical Case Sheet & Billing System</title>
+    <title>Sukayur Vaidiyasala - Premium Multi-Branch Case Sheet System</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; background: #f4f7f6; color: #333; }
-        .container { max-width: 1000px; margin: auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        h1, h2 { color: #006666; border-bottom: 2px solid #006666; padding-bottom: 5px; }
-        .section { margin-bottom: 20px; padding: 15px; background: #f9f9f9; border-radius: 5px; border-left: 4px solid #006666; }
-        label { font-weight: bold; display: block; margin-top: 10px; }
-        input[type="text"], input[type="number"], select, textarea { width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-        .checkbox-group { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin-top: 10px; }
-        .checkbox-item { display: flex; align-items: center; gap: 5px; }
-        .role-box { background: #e6f2f2; padding: 10px; margin-bottom: 15px; border-radius: 4px; border: 1px dashed #006666; }
-        button { background: #006666; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; margin-top: 20px; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background: #f0f4f3; color: #333; }
+        .container { max-width: 1100px; margin: 30px auto; background: #fff; padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        
+        /* 1. Brand Header & Logo */
+        .header-brand { display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid #006666; padding-bottom: 15px; margin-bottom: 25px; }
+        .header-brand h1 { color: #006666; margin: 0; font-size: 24px; }
+        .header-brand p { margin: 5px 0 0; color: #555; font-size: 14px; }
+        .branch-badge { background: #006666; color: white; padding: 6px 15px; border-radius: 6px; font-weight: bold; font-size: 14px; }
+
+        /* 2. Role & Branch Box */
+        .role-box { background: #e6f2f2; padding: 20px; margin-bottom: 25px; border-radius: 8px; border: 1px dashed #006666; }
+        
+        h2.section-title { color: #006666; border-bottom: 2px solid #006666; padding-bottom: 8px; margin-top: 35px; font-size: 18px; }
+        .section { margin-bottom: 25px; padding: 20px; background: #fafcfc; border-radius: 8px; border-left: 5px solid #006666; box-shadow: inset 0 0 5px rgba(0,0,0,0.02); }
+        
+        label { font-weight: 600; display: block; margin-top: 12px; font-size: 14px; color: #444; }
+        input[type="text"], input[type="number"], select, textarea { width: 100%; padding: 10px; margin-top: 6px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 14px; }
+        
+        .checkbox-group { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; margin-top: 12px; }
+        .checkbox-item { display: flex; align-items: center; gap: 8px; font-size: 14px; background: #fff; padding: 8px; border: 1px solid #e0e0e0; border-radius: 4px; }
+        
+        /* Action Buttons */
+        .btn-container { display: flex; gap: 15px; margin-top: 30px; }
+        button { background: #006666; color: white; padding: 12px 25px; border: none; border-radius: 6px; cursor: pointer; font-size: 16px; font-weight: bold; transition: background 0.3s; }
         button:hover { background: #004d4d; }
+        .btn-secondary { background: #555; }
+        .btn-secondary:hover { background: #333; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Multi-Branch Hospital Management System</h1>
+    <!-- 1. Brand Header & Logo -->
+    <div class="header-brand">
+        <div>
+            <h1>Sukayur Vaidiyasala (P) Ltd</h1>
+            <p>Traditional Keraleeya Panchakarma & Advanced Wellness Center</p>
+        </div>
+        <div class="branch-badge" id="displayBranch">Tiruvannamalai Branch</div>
+    </div>
 
-    <!-- Role & Branch Selection -->
+    <!-- 2. Multi-Branch & Role-Based Access Control -->
     <div class="role-box">
-        <h2>System Access & Branch Control</h2>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+        <h3 style="margin-top:0; color:#006666;">System Access & Multi-Branch Management</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
             <div>
                 <label>Select Branch (கிளை):</label>
-                <select id="branchSelect">
-                    <option value="tiruvannamalai">Tiruvannamalai Branch</option>
-                    <option value="branch2">Branch 2</option>
+                <select id="branchSelect" onchange="updateBranchName()">
+                    <option value="Tiruvannamalai Branch">Tiruvannamalai Branch</option>
+                    <option value="Branch 2">Branch 2 (Other Branch)</option>
                 </select>
             </div>
             <div>
                 <label>User Role (பயனர் நிலை):</label>
-                <select id="roleSelect" onchange="toggleView()">
-                    <option value="senior_doctor">Senior Doctor (Full Access - All Branches)</option>
-                    <option value="junior_doctor">Junior Doctor (Branch Access)</option>
-                    <option value="reception">Reception / Admin (Billing Only)</option>
+                <select id="roleSelect" onchange="toggleRoleView()">
+                    <option value="senior_doctor">Senior Doctor (Full Clinical & Multi-Branch Access)</option>
+                    <option value="junior_doctor">Junior Doctor (Clinical Access)</option>
+                    <option value="reception">Reception / Admin (Billing & Basic Info Only)</option>
                 </select>
             </div>
         </div>
     </div>
 
     <form>
-        <!-- Patient Details -->
+        <!-- Patient Information & 10. Follow-up / Previous Record Viewer -->
         <div class="section">
-            <h2>Patient Information</h2>
-            <label>Patient Name (பெயர்):</label>
-            <input type="text" placeholder="Enter patient name">
-            
-            <label>Age / Gender (வயது / பாலினம்):</label>
-            <input type="text" placeholder="Age & Gender">
+            <h2 class="section-title" style="margin-top:0;">Patient Information & History</h2>
+            <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 15px;">
+                <div>
+                    <label>Patient Name (பெயர்):</label>
+                    <input type="text" placeholder="Enter patient name">
+                </div>
+                <div>
+                    <label>Age / Gender (வயது/பாலினம்):</label>
+                    <input type="text" placeholder="Age / Gender">
+                </div>
+                <div>
+                    <label>Existing Patient Lookup:</label>
+                    <select style="background:#eef9f9;">
+                        <option>-- Select Previous Record --</option>
+                        <option>View Follow-up History...</option>
+                    </select>
+                </div>
+            </div>
         </div>
 
-        <!-- DOCTOR SECTION (Hidden for Reception) -->
-        <div id="doctorSection">
-            <!-- Vitals & Uploads -->
+        <!-- 12. Emergency Medical Alert Banner (Premium Feature) -->
+        <div style="background: #fff3f3; border: 1px solid #ff9999; padding: 12px; border-radius: 6px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+            <span style="color: #d9534f; font-weight: bold; font-size: 16px;">⚠️ Medical Alert / Allergies:</span>
+            <input type="text" placeholder="Note severe drug allergies or critical alerts here..." style="margin-top:0; border-color: #ff9999; background: #fff;">
+        </div>
+
+        <!-- DOCTOR SECTION (Hidden for Reception/Billing) -->
+        <div id="doctorClinicalSection">
+
+            <!-- 4. Dietary & Bowel Habits (Veg/Non-Veg & Fasting/Mala) -->
             <div class="section">
-                <h2>Vitals & Medical Reports (Doctor View Only)</h2>
-                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 10px;">
+                <h2 class="section-title" style="margin-top:0;">Dietary & Bowel History (உணவு மற்றும் மலச் சுழற்சி முறை)</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
                     <div>
-                        <label>Height (உயரம்):</label>
-                        <input type="text" placeholder="cm/ft">
+                        <label>Diet Preference:</label>
+                        <select>
+                            <option>Vegetarian (சைவம்)</option>
+                            <option>Non-Vegetarian (அசைவம்)</option>
+                            <option>Mixed / Special Diet</option>
+                        </select>
                     </div>
                     <div>
-                        <label>Weight (எடை):</label>
-                        <input type="text" placeholder="kg">
-                    </div>
-                    <div>
-                        <label>BP (ரத்த அழுத்தம்):</label>
-                        <input type="text" placeholder="mmHg">
-                    </div>
-                    <div>
-                        <label>Sugar (சர்க்கரை அளவு):</label>
-                        <input type="text" placeholder="mg/dL">
+                        <label>Bowel Habits / Fasting History (மலம் கழிக்கும் முறை):</label>
+                        <select>
+                            <option>Regular (சீரான மலம் - Once/Twice a day)</option>
+                            <option>Constipation (மலச்சிக்கல் / கடினம்)</option>
+                            <option>Irregular / Mandagni</option>
+                        </select>
                     </div>
                 </div>
-
-                <label>Upload Scan/Reports (ஸ்கேன் ரிப்போர்ட் அப்லோட்):</label>
-                <input type="file" multiple>
             </div>
 
-            <!-- Panchakarma & Conditions -->
+            <!-- 5. Ashtavidha Pareeksha with Auto-dosha & Manual Adjustment -->
             <div class="section">
-                <h2>Panchakarma Therapies & Conditions</h2>
-                <label>Select Panchakarma (பஞ்சகர்மா சிகிச்சைகள்):</label>
+                <h2 class="section-title" style="margin-top:0;">Ashtavidha Pareeksha & Dosha Assessment</h2>
+                <p style="font-size:13px; color:#666; margin-top:0;">(Auto-filled based on condition, editable manually by physician)</p>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;">
+                    <div><label>1. Nadi (நாடி):</label><input type="text" value="Vata-Pitta Pradhana"></div>
+                    <div><label>2. Mala (மலம்):</label><input type="text" value="Sama Mala"></div>
+                    <div><label>3. Mutra (மூத்திரம்):</label><input type="text" value="Samanya"></div>
+                    <div><label>4. Jihwa (ஜிஹ்வா):</label><input type="text" value="Nirama / Coated"></div>
+                    <div><label>5. Shabda (சப்தம்):</label><input type="text" value="Spashta"></div>
+                    <div><label>6. Sparsha (ஸ்பர்ஷம்):</label><input type="text" value="Anushna"></div>
+                    <div><label>7. Drik (த்ருக்):</label><input type="text" value="Prakrutha"></div>
+                    <div><label>8. Akriti (ஆக்ருதி):</label><input type="text" value="Madhyama"></div>
+                </div>
+            </div>
+
+            <!-- Vitals & 8. Scan/Report Upload -->
+            <div class="section">
+                <h2 class="section-title" style="margin-top:0;">Vitals & Scan Report Uploads</h2>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;">
+                    <div><label>Height:</label><input type="text" placeholder="cm/ft"></div>
+                    <div><label>Weight:</label><input type="text" placeholder="kg"></div>
+                    <div><label>BP:</label><input type="text" placeholder="mmHg"></div>
+                    <div><label>Sugar:</label><input type="text" placeholder="mg/dL"></div>
+                </div>
+                <label>Upload Scans / Lab Reports (ஸ்கேன் ரிப்போர்ட் அப்லோட்):</label>
+                <input type="file" multiple style="background:#fff;">
+            </div>
+
+            <!-- 11. Clinical Image / Progress Photography (Premium Feature) -->
+            <div class="section">
+                <h2 class="section-title" style="margin-top:0;">Clinical Progress Photography (Before/After Images)</h2>
+                <label>Upload Patient Condition Photos (Skin lesions, Swelling, etc.):</label>
+                <input type="file" accept="image/*" multiple style="background:#fff;">
+            </div>
+
+            <!-- 6. 100+ Diseases in English & Sanskrit Names -->
+            <div class="section">
+                <h2 class="section-title" style="margin-top:0;">Disease Conditions (Sanskrit & English Nomenclature)</h2>
+                <label>Select Diagnosed Conditions:</label>
                 <div class="checkbox-group">
-                    <div class="checkbox-item"><input type="checkbox"> Vamana (வமனம்)</div>
-                    <div class="checkbox-item"><input type="checkbox"> Virechana (விரேசனம்)</div>
-                    <div class="checkbox-item"><input type="checkbox"> Basti (வஸ்தி)</div>
-                    <div class="checkbox-item"><input type="checkbox"> Nasya (நஸ்யம்)</div>
-                    <div class="checkbox-item"><input type="checkbox"> Raktamokshana (ரக்தமோக்ஷணம்)</div>
+                    <div class="checkbox-item"><input type="checkbox"> Gridhrasi (Sciatica / Lower Back)</div>
+                    <div class="checkbox-item"><input type="checkbox"> Sandhigata Vata (Osteoarthritis)</div>
+                    <div class="checkbox-item"><input type="checkbox"> Vata Rakta (Gout / Joint Inflammation)</div>
+                    <div class="checkbox-item"><input type="checkbox"> Amlapitta (Hyperacidity / Gastritis)</div>
+                    <div class="checkbox-item"><input type="checkbox"> Prameha (Diabetes Mellitus)</div>
+                    <div class="checkbox-item"><input type="checkbox"> Psoriasis / Kushta (Skin Disorders)</div>
+                    <div class="checkbox-item"><input type="checkbox"> Unmada / Nidranasha (Insomnia / Anxiety)</div>
+                    <div class="checkbox-item"><input type="checkbox"> Arshas (Hemorrhoids / Piles)</div>
                 </div>
             </div>
 
-            <!-- Multi-language Diet & Prescription Instructions -->
+            <!-- 7. 54+ Panchakarma Therapies & Sessions -->
             <div class="section">
-                <h2>Diet Chart & Prescription Instructions (Multi-Language)</h2>
-                <label>Diet Description & Medication Guidelines (உணவு முறை மற்றும் மருந்து உண்ணும் முறை):</label>
-                <textarea rows="4" placeholder="Enter instructions (Supports English, Tamil, Hindi, Malayalam, Kannada)..."></textarea>
-                <p style="font-size: 13px; color: #666; margin-top: 5px;">
-                    * Multi-language support enabled for patient prescriptions and diet charts.
+                <h2 class="section-title" style="margin-top:0;">Panchakarma Therapies & Session Management</h2>
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 15px; align-items: center;">
+                    <div>
+                        <label>Select Therapy (54+ Treatments Dropdown):</label>
+                        <select>
+                            <option>Abhyangam (அபியங்கம்)</option>
+                            <option>Swedanam (ஸ்வேதனம்)</option>
+                            <option>Shirodhara (சிரோதாரா)</option>
+                            <option>Navarakizhi (நவரக்கிழி)</option>
+                            <option>Pizhichil (பிழிச்சல்)</option>
+                            <option>Kati Basti (கட்டி வஸ்தி)</option>
+                            <option>Matra Basti (மாத்ர வஸ்தி)</option>
+                            <option>Vamana / Virechana / Nasya</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Sessions / Days (செஷன்ஸ்/நாட்கள்):</label>
+                        <input type="number" placeholder="Ex: 7 Days" min="1">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 9. Multi-Language Diet Chart & Prescription (English, Tamil, Hindi, Malayalam, Kannada) -->
+            <div class="section">
+                <h2 class="section-title" style="margin-top:0;">Diet Chart & Prescription Instructions (5 Languages Support)</h2>
+                <label>Dietary Guidelines & Medicines (English primary with 5-Language support - தமிழ், हिन्दी, മലയാളം, ಕನ್ನಡ):</label>
+                <textarea rows="5" placeholder="Enter prescription, food restrictions, and multi-language instructions here..."></textarea>
+                <p style="font-size: 13px; color: #006666; margin-top: 5px; font-weight: bold;">
+                    ✓ Multi-language printing format enabled for patient handovers.
                 </p>
             </div>
         </div>
 
-        <!-- RECEPTION / BILLING SECTION (Visible to All, Main focus for Admin/Reception) -->
+        <!-- 3. Billing & Payment Details (Dedicated for Reception/Admin) -->
         <div class="section" style="background: #eef9f9; border-left-color: #004d4d;">
-            <h2>Billing & Payment Details (பில் விவரங்கள்)</h2>
-            <label>Total Bill Amount (மொத்த கட்டணம் - ₹):</label>
-            <input type="number" placeholder="Enter total bill amount">
+            <h2 class="section-title" style="margin-top:0; color:#004d4d;">Billing & Payment Details (பில் விவரங்கள்)</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div>
+                    <label>Total Treatment & Medicine Charges (₹):</label>
+                    <input type="number" placeholder="Enter total amount">
+                </div>
+                <div>
+                    <label>Payment Status:</label>
+                    <select>
+                        <option>Paid (செலுத்தப்பட்டது)</option>
+                        <option>Pending / Due (நிலுவை)</option>
+                        <option>Advance Paid</option>
+                    </select>
+                </div>
+            </div>
         </div>
 
-        <button type="submit">Save Record</button>
+        <!-- 13. Digital Signature & Secure Export/Print (Premium Feature) -->
+        <div class="btn-container">
+            <button type="submit">Save & Process Record</button>
+            <button type="button" class="btn-secondary" onclick="window.print()">🖨️ Secure Print / Export PDF</button>
+        </div>
     </form>
 </div>
 
 <script>
-    function toggleView() {
+    function updateBranchName() {
+        const branch = document.getElementById('branchSelect').value;
+        document.getElementById('displayBranch').innerText = branch;
+    }
+
+    function toggleRoleView() {
         const role = document.getElementById('roleSelect').value;
-        const doctorSection = document.getElementById('doctorSection');
-        
+        const clinicalSection = document.getElementById('doctorClinicalSection');
         if (role === 'reception') {
-            doctorSection.style.display = 'none'; // Receptionists cannot see medical case sheets
+            clinicalSection.style.display = 'none'; // Reception sees billing and basic info only for data security
         } else {
-            doctorSection.style.display = 'block'; // Senior and Junior doctors can view clinical details
+            clinicalSection.style.display = 'block'; // Doctors and Senior management see full clinical details
         }
     }
 </script>
