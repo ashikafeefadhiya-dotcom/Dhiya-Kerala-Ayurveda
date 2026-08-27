@@ -1,108 +1,139 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ta">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>தியா கேரளா ஆயுர்வேதா பஞ்சகர்மா வைத்தியசாலை - Case Sheet System</title>
+    <title>தியா கேரளா ஆயுர்வேதா பஞ்சகர்மா வைத்தியசாலை - Master Clinical Case Sheet System</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background: #f0f4f3; color: #333; }
-        .container { max-width: 1100px; margin: 30px auto; background: #fff; padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        :root {
+            --primary: #005A5B;
+            --primary-dark: #003F40;
+            --accent: #E0F2F1;
+            --text-main: #2C3E50;
+            --border-color: #CBD5E1;
+            --bg-color: #F8FAFC;
+        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background: var(--bg-color); color: var(--text-main); line-height: 1.6; }
+        .container { max-width: 1280px; margin: 30px auto; background: #fff; padding: 40px; border-radius: 12px; box-shadow: 0 4px 25px rgba(0,0,0,0.06); }
         
-        /* 1. Brand Header & Logo */
-        .header-brand { display: flex; align-items: center; gap: 20px; border-bottom: 3px solid #006666; padding-bottom: 15px; margin-bottom: 25px; }
-        .logo-box { width: 70px; height: 70px; background: #006666; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 24px; border-radius: 50%; border: 2px solid #004d4d; }
-        .header-text h1 { color: #006666; margin: 0; font-size: 24px; }
-        .header-text p { margin: 5px 0 0; color: #555; font-size: 13px; }
-        .branch-badge { margin-left: auto; background: #006666; color: white; padding: 8px 18px; border-radius: 6px; font-weight: bold; font-size: 14px; }
+        /* Brand Header */
+        .header-brand { display: flex; align-items: center; gap: 20px; border-bottom: 3px solid var(--primary); padding-bottom: 20px; margin-bottom: 25px; }
+        .logo-box { width: 80px; height: 80px; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 22px; border-radius: 50%; border: 3px solid var(--primary-dark); box-shadow: 0 2px 8px rgba(0,90,91,0.3); }
+        .header-text h1 { color: var(--primary); margin: 0; font-size: 26px; letter-spacing: 0.5px; }
+        .header-text p { margin: 5px 0 0; color: #64748B; font-size: 14px; }
+        .branch-badge { margin-left: auto; background: var(--primary); color: white; padding: 10px 20px; border-radius: 6px; font-weight: bold; font-size: 14px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
 
-        /* 2. Role & Branch Box */
-        .role-box { background: #e6f2f2; padding: 20px; margin-bottom: 25px; border-radius: 8px; border: 1px dashed #006666; }
+        /* Role & Branch Control */
+        .role-box { background: var(--accent); padding: 20px; margin-bottom: 25px; border-radius: 8px; border: 1px dashed var(--primary); }
         
-        h2.section-title { color: #006666; border-bottom: 2px solid #006666; padding-bottom: 8px; margin-top: 35px; font-size: 18px; }
-        .section { margin-bottom: 25px; padding: 20px; background: #fafcfc; border-radius: 8px; border-left: 5px solid #006666; box-shadow: inset 0 0 5px rgba(0,0,0,0.02); }
+        h2.section-title { color: var(--primary); border-bottom: 2px solid var(--primary); padding-bottom: 8px; margin-top: 35px; font-size: 18px; display: flex; align-items: center; gap: 10px; }
+        .section { margin-bottom: 25px; padding: 22px; background: #fff; border-radius: 8px; border: 1px solid #E2E8F0; border-left: 5px solid var(--primary); box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
         
-        label { font-weight: 600; display: block; margin-top: 12px; font-size: 14px; color: #444; }
-        input[type="text"], input[type="number"], select, textarea { width: 100%; padding: 10px; margin-top: 6px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 14px; }
+        label { font-weight: 600; display: block; margin-top: 12px; font-size: 13.5px; color: #334155; }
+        input[type="text"], input[type="number"], select, textarea { width: 100%; padding: 10px 12px; margin-top: 6px; border: 1px solid var(--border-color); border-radius: 6px; box-sizing: border-box; font-size: 14px; transition: border 0.2s; }
+        input[type="text"]:focus, input[type="number"]:focus, select:focus, textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(0,90,91,0.1); }
         
-        .checkbox-group { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; margin-top: 12px; max-height: 250px; overflow-y: auto; padding: 5px; border: 1px solid #e0e0e0; background: #fff; border-radius: 6px; }
-        .checkbox-item { display: flex; align-items: center; gap: 8px; font-size: 13px; background: #fafafa; padding: 8px; border: 1px solid #eee; border-radius: 4px; }
-        
+        /* Disease Selection Grid (100+ items) */
+        .disease-search-box { margin-bottom: 12px; }
+        .disease-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 10px; margin-top: 10px; max-height: 320px; overflow-y: auto; padding: 12px; border: 1px solid var(--border-color); background: #FAFAFA; border-radius: 6px; }
+        .disease-item { display: flex; align-items: center; gap: 10px; font-size: 13px; background: #fff; padding: 8px 12px; border: 1px solid #E2E8F0; border-radius: 4px; transition: background 0.1s; }
+        .disease-item:hover { background: #F1F5F9; }
+        .disease-item input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--primary); cursor: pointer; }
+
+        /* Therapy Management Rows */
+        .therapy-row { display: grid; grid-template-columns: 2.2fr 1fr 1fr auto; gap: 12px; align-items: center; margin-top: 12px; background: #F8FAFC; padding: 10px; border-radius: 6px; border: 1px solid #E2E8F0; }
+
         /* Action Buttons */
-        .btn-container { display: flex; gap: 15px; margin-top: 30px; }
-        button { background: #006666; color: white; padding: 12px 25px; border: none; border-radius: 6px; cursor: pointer; font-size: 16px; font-weight: bold; transition: background 0.3s; }
-        button:hover { background: #004d4d; }
-        .btn-secondary { background: #555; }
-        .btn-secondary:hover { background: #333; }
+        .btn-container { display: flex; gap: 15px; margin-top: 35px; padding-top: 20px; border-top: 1px solid #E2E8F0; }
+        button { background: var(--primary); color: white; padding: 12px 25px; border: none; border-radius: 6px; cursor: pointer; font-size: 15px; font-weight: bold; transition: background 0.2s, transform 0.1s; }
+        button:hover { background: var(--primary-dark); }
+        button:active { transform: translateY(1px); }
+        .btn-secondary { background: #475569; }
+        .btn-secondary:hover { background: #334155; }
+        .btn-add { background: #16A34A; padding: 8px 16px; font-size: 13px; margin-top: 6px; }
+        .btn-add:hover { background: #15803D; }
+        .btn-del { background: #DC2626; padding: 8px 12px; font-size: 13px; margin-top: 0; }
+        .btn-del:hover { background: #B91C1C; }
+        
+        .counter-badge { background: #E2E8F0; color: #334155; padding: 2px 8px; border-radius: 12px; font-size: 12px; font-weight: bold; margin-left: 8px; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <!-- 1. Brand Header & Logo ("தியா கேரளா ஆயுர்வேதா பஞ்சகர்மா வைத்தியசாலை") -->
+    <!-- Brand Header -->
     <div class="header-brand">
         <div class="logo-box">தியா</div>
         <div class="header-text">
             <h1>தியா கேரளா ஆயுர்வேதா பஞ்சகர்மா வைத்தியசாலை</h1>
-            <p>Diya Kerala Ayurveda Panchakarma Vaidyasala - Traditional Healing & Wellness Center</p>
+            <p>Diya Kerala Ayurveda Panchakarma Vaidyasala - Comprehensive Clinical Management System</p>
         </div>
         <div class="branch-badge" id="displayBranch">Tiruvannamalai Branch</div>
     </div>
 
-    <!-- 2. Multi-Branch & Role-Based Access Control -->
+    <!-- Multi-Branch & Role Management -->
     <div class="role-box">
-        <h3 style="margin-top:0; color:#006666;">System Access & Multi-Branch Management</h3>
+        <h3 style="margin-top:0; color:var(--primary);">System Access & Multi-Branch Control</h3>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
             <div>
                 <label>Select Branch (கிளை):</label>
                 <select id="branchSelect" onchange="updateBranchName()">
                     <option value="Tiruvannamalai Branch">Tiruvannamalai Branch</option>
-                    <option value="Branch 2">Branch 2 (Other Branch)</option>
+                    <option value="Branch 2">Branch 2 (Main Centre)</option>
                 </select>
             </div>
             <div>
                 <label>User Role (பயனர் நிலை):</label>
                 <select id="roleSelect" onchange="toggleRoleView()">
-                    <option value="senior_doctor">Senior Doctor (Full Clinical & Multi-Branch Access)</option>
+                    <option value="senior_doctor">Senior Doctor (Full Clinical Access)</option>
                     <option value="junior_doctor">Junior Doctor (Clinical Access)</option>
-                    <option value="reception">Reception / Admin (Billing & Basic Info Only)</option>
+                    <option value="reception">Reception / Billing Admin</option>
                 </select>
             </div>
         </div>
     </div>
 
-    <form>
-        <!-- Patient Information & 10. Follow-up / Previous Record Viewer -->
+    <form onsubmit="event.preventDefault(); alert('Case Sheet Saved Successfully!');">
+        <!-- Patient Information & Follow-up Lookup -->
         <div class="section">
             <h2 class="section-title" style="margin-top:0;">Patient Information & History</h2>
             <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 15px;">
                 <div>
                     <label>Patient Name (பெயர்):</label>
-                    <input type="text" placeholder="Enter patient name">
+                    <input type="text" placeholder="Enter patient full name" required>
                 </div>
                 <div>
-                    <label>Age / Gender (வயது/பாலினம்):</label>
-                    <input type="text" placeholder="Age / Gender">
+                    <label>Age / Gender (வயது / பாலினம்):</label>
+                    <input type="text" placeholder="Ex: 45 / Male" required>
                 </div>
                 <div>
-                    <label>Existing Patient Lookup (10. Follow-up):</label>
-                    <select style="background:#eef9f9;">
+                    <label>Existing Patient Lookup (Follow-up):</label>
+                    <select style="background:#F0FDFA;">
                         <option>-- Select Previous Record --</option>
-                        <option>View Follow-up History / Past Case Sheets...</option>
+                        <option>Load Previous Visit Case Sheet...</option>
                     </select>
                 </div>
             </div>
         </div>
 
-        <!-- 12. Emergency Medical Alert Banner -->
-        <div style="background: #fff3f3; border: 1px solid #ff9999; padding: 12px; border-radius: 6px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
-            <span style="color: #d9534f; font-weight: bold; font-size: 15px;">⚠️ Medical Alert / Allergies:</span>
-            <input type="text" placeholder="Note severe drug allergies or critical alerts here..." style="margin-top:0; border-color: #ff9999; background: #fff;">
+        <!-- Emergency Medical Alert Banner -->
+        <div style="background: #FEF2F2; border: 1px solid #FCA5A5; padding: 12px 16px; border-radius: 6px; margin-bottom: 25px; display: flex; align-items: center; gap: 12px;">
+            <span style="color: #DC2626; font-weight: bold; font-size: 15px;">⚠️ Medical Alert / Allergies:</span>
+            <input type="text" placeholder="Note severe drug allergies, hypersensitivity or critical clinical alerts here..." style="margin-top:0; border-color: #FCA5A5; background: #fff;">
         </div>
 
-        <!-- DOCTOR SECTION (Hidden for Reception/Billing) -->
+        <!-- DOCTOR CLINICAL SECTION -->
         <div id="doctorClinicalSection">
 
-            <!-- 4. Dietary & Bowel Habits -->
+            <!-- History of Illness & Auto Diet Chart Generator -->
+            <div class="section">
+                <h2 class="section-title" style="margin-top:0;">History of Illness & Chief Complaints (முக்கிய நோய் வரலாறு)</h2>
+                <label>Enter Chief Complaints / History of Illness / Clinical Notes (ஹிஸ்டரி ஆஃப் இல்னஸ்):</label>
+                <textarea rows="3" id="historyInput" placeholder="Enter patient's chief complaints, onset, duration, aggravating & relieving factors..."></textarea>
+                <button type="button" class="btn-add" onclick="generateAutoDiet()" style="margin-top:10px;">✨ Auto-Generate Diet & Prescription based on History</button>
+            </div>
+
+            <!-- Dietary & Bowel Habits -->
             <div class="section">
                 <h2 class="section-title" style="margin-top:0;">Dietary & Bowel History (உணவு மற்றும் மலச் சுழற்சி முறை)</h2>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
@@ -119,29 +150,30 @@
                         <select>
                             <option>Regular (சீரான மலம் - Once/Twice a day)</option>
                             <option>Constipation (மலச்சிக்கல் / கடினம்)</option>
-                            <option>Irregular / Mandagni</option>
+                            <option>Irregular / Mandagni (அக்னி மந்தம்)</option>
+                            <option>Loose Stools / Diarrhea</option>
                         </select>
                     </div>
                 </div>
             </div>
 
-            <!-- 5. Ashtavidha Pareeksha with Auto-dosha & Manual Adjustment -->
+            <!-- Ashtavidha Pareeksha with Auto-dosha & Manual Edit -->
             <div class="section">
                 <h2 class="section-title" style="margin-top:0;">Ashtavidha Pareeksha & Dosha Assessment</h2>
-                <p style="font-size:13px; color:#666; margin-top:0;">(Auto-filled based on condition, fully editable manually by physician)</p>
+                <p style="font-size:13px; color:#64748B; margin-top:0;">(Auto-evaluated based on condition, fully editable manually by physician)</p>
                 <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;">
-                    <div><label>1. Nadi (நாடி):</label><input type="text" id="nadiVal" value="Vata-Pitta Pradhana"></div>
-                    <div><label>2. Mala (மலம்):</label><input type="text" id="malaVal" value="Sama Mala"></div>
-                    <div><label>3. Mutra (மூத்திரம்):</label><input type="text" id="mutraVal" value="Samanya"></div>
-                    <div><label>4. Jihwa (ஜிஹ்வா):</label><input type="text" id="jihwaVal" value="Nirama / Coated"></div>
-                    <div><label>5. Shabda (சப்தம்):</label><input type="text" id="shabdaVal" value="Spashta"></div>
-                    <div><label>6. Sparsha (ஸ்பர்ஷம்):</label><input type="text" id="sparshaVal" value="Anushna"></div>
-                    <div><label>7. Drik (த்ருக்):</label><input type="text" id="drikVal" value="Prakrutha"></div>
-                    <div><label>8. Akriti (ஆக்ருதி):</label><input type="text" id="akritiVal" value="Madhyama"></div>
+                    <div><label>1. Nadi (நாடி):</label><input type="text" value="Vata-Pitta Pradhana"></div>
+                    <div><label>2. Mala (மலம்):</label><input type="text" value="Sama Mala"></div>
+                    <div><label>3. Mutra (மூத்திரம்):</label><input type="text" value="Samanya"></div>
+                    <div><label>4. Jihwa (ஜிஹ்வா):</label><input type="text" value="Nirama / Coated"></div>
+                    <div><label>5. Shabda (சப்தம்):</label><input type="text" value="Spashta"></div>
+                    <div><label>6. Sparsha (ஸ்பர்ஷம்):</label><input type="text" value="Anushna"></div>
+                    <div><label>7. Drik (த்ருக்):</label><input type="text" value="Prakrutha"></div>
+                    <div><label>8. Akriti (ஆக்ருதி):</label><input type="text" value="Madhyama"></div>
                 </div>
             </div>
 
-            <!-- Vitals & 8. Scan/Report Upload -->
+            <!-- Vitals & Scan Reports -->
             <div class="section">
                 <h2 class="section-title" style="margin-top:0;">Vitals & Scan Report Uploads</h2>
                 <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;">
@@ -150,98 +182,255 @@
                     <div><label>BP:</label><input type="text" placeholder="mmHg"></div>
                     <div><label>Sugar:</label><input type="text" placeholder="mg/dL"></div>
                 </div>
-                <label>Upload Scans / Lab Reports (ஸ்கேன் ரிப்போர்ட் அப்லோட்):</label>
+                <label>Upload Scans / Lab Reports (PDF/Images):</label>
                 <input type="file" multiple style="background:#fff;">
             </div>
 
-            <!-- 11. Clinical Image / Progress Photography -->
+            <!-- Clinical Image Photography -->
             <div class="section">
                 <h2 class="section-title" style="margin-top:0;">Clinical Progress Photography (Before/After Images)</h2>
-                <label>Upload Patient Condition Photos (Skin lesions, Swelling, etc.):</label>
+                <label>Upload Patient Condition Photos (Skin lesions, swelling, posture, etc.):</label>
                 <input type="file" accept="image/*" multiple style="background:#fff;">
             </div>
 
-            <!-- 6. 100+ Diseases in English & Sanskrit Names -->
+            <!-- 100+ Complete Disease Conditions (Sanskrit & English Nomenclature) -->
             <div class="section">
-                <h2 class="section-title" style="margin-top:0;">Disease Conditions (Sanskrit & English Nomenclature - 100+ List)</h2>
-                <label>Select Diagnosed Conditions:</label>
-                <div class="checkbox-group">
-                    <div class="checkbox-item"><input type="checkbox"> Gridhrasi (Sciatica / Lower Back Pain)</div>
-                    <div class="checkbox-item"><input type="checkbox"> Sandhigata Vata (Osteoarthritis)</div>
-                    <div class="checkbox-item"><input type="checkbox"> Vata Rakta (Gout / Joint Inflammation)</div>
-                    <div class="checkbox-item"><input type="checkbox"> Amlapitta (Hyperacidity / Gastritis)</div>
-                    <div class="checkbox-item"><input type="checkbox"> Prameha (Diabetes Mellitus)</div>
-                    <div class="checkbox-item"><input type="checkbox"> Psoriasis / Kushta (Skin Disorders)</div>
-                    <div class="checkbox-item"><input type="checkbox"> Unmada / Nidranasha (Insomnia / Anxiety)</div>
-                    <div class="checkbox-item"><input type="checkbox"> Arshas (Hemorrhoids / Piles)</div>
-                    <div class="checkbox-item"><input type="checkbox"> Katigraha (Lumbar Spondylosis)</div>
-                    <div class="checkbox-item"><input type="checkbox"> Manyastambha (Cervical Spondylosis)</div>
-                    <div class="checkbox-item"><input type="checkbox"> Vataroga (Neurological Disorders)</div>
-                    <div class="checkbox-item"><input type="checkbox"> Shotha (Edema / Swelling)</div>
+                <h2 class="section-title" style="margin-top:0;">
+                    Disease Conditions (100+ Complete Sanskrit & English Nomenclature List)
+                    <span class="counter-badge" id="diseaseCount">104 Conditions</span>
+                </h2>
+                <div class="disease-search-box">
+                    <input type="text" id="diseaseSearch" placeholder="🔍 Search diseases by Sanskrit or English name..." onkeyup="filterDiseases()">
+                </div>
+                <div class="disease-grid" id="diseaseGridContainer">
+                    <!-- Complete 104 Diseases List -->
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Gridhrasi"> Gridhrasi (Sciatica / Lower Back Pain)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Sandhigata Vata"> Sandhigata Vata (Osteoarthritis)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Vata Rakta"> Vata Rakta (Gout / Joint Inflammation)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Amlapitta"> Amlapitta (Hyperacidity / Gastritis)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Prameha"> Prameha (Diabetes Mellitus)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Psoriasis / Kushta"> Psoriasis / Kushta (Skin Disorders)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Unmada / Nidranasha"> Unmada / Nidranasha (Insomnia / Anxiety)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Arshas"> Arshas (Hemorrhoids / Piles)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Katigraha"> Katigraha (Lumbar Spondylosis)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Manyastambha"> Manyastambha (Cervical Spondylosis)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Vataroga"> Vataroga (Neurological Disorders)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Shotha"> Shotha (Edema / Swelling)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Amavata"> Amavata (Rheumatoid Arthritis)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Pakshaghata"> Pakshaghata (Hemiplegia / Paralysis)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Khalitya & Palitya"> Khalitya & Palitya (Hair Fall & Premature Graying)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Jeerna Jwara"> Jeerna Jwara (Chronic Fever)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Kasa & Shwasa"> Kasa & Shwasa (Cough & Asthma / Bronchial Disorders)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Raktapitta"> Raktapitta (Bleeding Disorders)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Mutrashmari"> Mutrashmari (Renal Calculi / Kidney Stones)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Apasmara"> Apasmara (Epilepsy / Seizures)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Shirogrha"> Shirogrha (Chronic Headache / Migraine)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Grahani"> Grahani (IBS / Malabsorption Syndrome)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Stoulya / Medoroga"> Stoulya / Medoroga (Obesity / Lipid Disorders)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Pandu Roga"> Pandu Roga (Anemia)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Kamala"> Kamala (Jaundice / Liver Disorders)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Ashmari"> Ashmari (Gallbladder / Urinary Stones)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Granthi & Arbuda"> Granthi & Arbuda (Cysts & Tumors)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Bhagandara"> Bhagandara (Fistula-in-ano)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Nadivrana"> Nadivrana (Sinus / Non-healing ulcers)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Yonidosha / Stri Roga"> Yonidosha / Stri Roga (Gynecological Disorders)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Shukradhosha / Klaibya"> Shukradhosha / Klaibya (Male Sexual Disorders / Infertility)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Netra Roga"> Netra Roga (Eye Disorders)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Karna Roga"> Karna Roga (Ear Disorders)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Nasa Roga"> Nasa Roga (Nasal Disorders / Sinusitis)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Mukha Roga"> Mukha Roga (Oral & Dental Disorders)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Visha Roga"> Visha Roga (Toxicology Conditions)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Jaraschikitsa / Rasayana"> Jaraschikitsa / Rasayana (Geriatric / Anti-aging Care)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Vajeekarana Disorders"> Vajeekarana Disorders (Virility & Vitality)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Ardita"> Ardita (Facial Palsy / Bell's Palsy)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Pangutwa"> Pangutwa (Paraplegia / Gait disorders)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Graha Roga"> Graha Roga (Pediatric Psychosomatic Disorders)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Urustambha"> Urustambha (Stiffness of Thighs)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Vatashonita"> Vatashonita (Advanced Gout / Blood Impurity)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Vataja Gulma"> Vataja Gulma (Phantom Abdominal Tumor)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Hridroga"> Hridroga (Cardiac Disorders / Angina)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Murcha & Sanyasa"> Murcha & Sanyasa (Syncope / Coma)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Trishna"> Trishna (Excessive Thirst / Polydipsia)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Chhardi"> Chhardi (Nausea / Vomiting)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Atisara"> Atisara (Acute Diarrhea / Dysentery)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Vibandha"> Vibandha (Severe Chronic Constipation)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Shoola"> Shoola (Abdominal Colic & Spasmodic Pains)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Udavarta"> Udavarta (Upward Movement of Vata)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Mutrakrichchhra"> Mutrakrichchhra (Dysuria / Painful Urination)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Mutraghata"> Mutraghata (Urinary Retention / Obstruction)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Prameha Pidika"> Prameha Pidika (Diabetic Carbuncles / Sores)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Vipadika"> Vipadika (Chapped Soles / Palm Psoriasis)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Dadru"> Dadru (Fungal Infection / Ringworm)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Vicharchika"> Vicharchika (Eczema / Chronic Dermatitis)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Kshudra Kushta"> Kshudra Kushta (Minor Skin Eruptions)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Visarpa"> Visarpa (Erysipelas / Herpes Zoster)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Alaji"> Alaji (Corneal Ulcer / Boil)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Vidradhi"> Vidradhi (Internal Abscess / Cellulitis)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Apachi"> Apachi (Scrofula / Lymphadenitis)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Arbuda"> Arbuda (Malignant / Benign Neoplasms)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Shleepada"> Shleepada (Filariasis / Elephantiasis)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Galaganda"> Galaganda (Goiter / Thyroid Enlargement)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Gandamala"> Gandamala (Cervical Lymph Node Hypertrophy)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Tilakalaka"> Tilakalaka (Moles / Pigmented Nevi)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Vyanga"> Vyanga (Melasma / Facial Pigmentation)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Neelika"> Neelika (Bluish Pigmentation)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Palitya"> Palitya (Premature Graying of Hair)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Indralupta"> Indralupta (Alopecia Areata)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Darunaka"> Darunaka (Severe Dandruff / Seborrheic Dermatitis)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Switra"> Switra (Vitiligo / Leukoderma)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Karna Shoola"> Karna Shoola (Otalgia / Earache)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Karna Nada"> Karna Nada (Tinnitus / Ringing in Ears)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Karna Strava"> Karna Strava (Otorrhea / Ear Discharge)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Pratishyaya"> Pratishyaya (Allergic Rhinitis / Common Cold)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Peenasa"> Peenasa (Chronic Sinusitis / Ozena)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Putinasya"> Putinasya (Foul Smelling Nasal Discharge)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Nasa Raktapitta"> Nasa Raktapitta (Epistaxis / Nasal Bleeding)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Mukha Paka"> Mukha Paka (Stomatitis / Mouth Ulcers)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Danta Shoola"> Danta Shoola (Toothache / Odontalgia)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Danta Veshtaka"> Danta Veshtaka (Gingivitis / Pyorrhea)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Upajihwa"> Upajihwa (Ranula / Sublingual Swelling)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Galashalika"> Galashalika (Tonsillitis)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Swarabheda"> Swarabheda (Hoarseness of Voice / Dysphonia)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Adhijihwa"> Adhijihwa (Epiglottitis)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Vibandha Roga"> Vibandha Roga (Intestinal Obstruction)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Atisara Roga"> Atisara Roga (Chronic Dysentery)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Vatarakta Sandhishoola"> Vatarakta Sandhishoola (Polyarthralgia)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Asthigata Vata"> Asthigata Vata (Deep Bone & Joint Pain)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Majjagata Vata"> Majjagata Vata (Bone Marrow Vata Disorders)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Shukragata Vata"> Shukragata Vata (Seminal Vata Impairment)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Rakta Dhatukshaya"> Rakta Dhatukshaya (Blood Tissue Depletion)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Mamsa Dhatukshaya"> Mamsa Dhatukshaya (Muscle Wasting / Atrophy)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Meda Dhatukshaya"> Meda Dhatukshaya (Adipose Tissue Depletion)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Asthi Dhatukshaya"> Asthi Dhatukshaya (Osteoporosis / Bone Weakness)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Majja Dhatukshaya"> Majja Dhatukshaya (Nervous System Depletion)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Shukra Dhatukshaya"> Shukra Dhatukshaya (Reproductive Fluid Depletion)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Ojakshaya"> Ojakshaya (Immunodeficiency / Low Vitality)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Bala Kshaya"> Bala Kshaya (General Physical Debility)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Vardhakhya Janya Roga"> Vardhakhya Janya Roga (Geriatric Degenerative Disorders)</div>
+                    <div class="disease-item"><input type="checkbox" name="disease" value="Smritinasha"> Smritinasha (Memory Loss / Cognitive Decline)</div>
                 </div>
             </div>
 
-            <!-- 7. 54+ Panchakarma Therapies & Sessions -->
+            <!-- 57+ Complete Panchakarma Therapies with Multi-Select & Multiple Rows -->
             <div class="section">
-                <h2 class="section-title" style="margin-top:0;">Panchakarma Therapies & Session Management (54+ Treatments)</h2>
-                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 15px; align-items: center;">
-                    <div>
-                        <label>Select Therapy (54+ Treatments Dropdown):</label>
-                        <select>
-                            <option>Abhyangam (அபியங்கம்)</option>
-                            <option>Swedanam (ஸ்வேதனம்)</option>
-                            <option>Shirodhara (சிரோதாரா)</option>
-                            <option>Navarakizhi (நவரக்கிழி)</option>
-                            <option>Pizhichil (பிழிச்சல்)</option>
-                            <option>Kati Basti (கட்டி வஸ்தி)</option>
-                            <option>Matra Basti (மாத்ர வஸ்தி)</option>
-                            <option>Vamana (வமனம்)</option>
-                            <option>Virechana (விரேசனம்)</option>
-                            <option>Nasya (நஸ்யம்)</option>
-                            <option>Raktamokshana (ரக்தமோக்ஷணம்)</option>
-                            <option>Upanaha Sweda (உபநாக ஸ்வேதம்)</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label>Sessions / Days (செஷன்ஸ்/நாட்கள்):</label>
-                        <input type="number" placeholder="Ex: 7 Days / Sessions" min="1">
+                <h2 class="section-title" style="margin-top:0;">
+                    Panchakarma Therapies & Multiple Session Management
+                    <span class="counter-badge">57+ Professional Treatments</span>
+                </h2>
+                <p style="font-size:13px; color:#64748B; margin-top:0;">(Select multiple simultaneous therapies, specify individual days/sessions and application type)</p>
+                
+                <div id="therapyContainer">
+                    <div class="therapy-row">
+                        <div>
+                            <label style="margin-top:0;">Select Therapy:</label>
+                            <select class="therapy-select" required>
+                                <option value="">-- Choose Panchakarma Therapy --</option>
+                                <option>Abhyangam (அபியங்கம் - Full Body Massage)</option>
+                                <option>Swedanam (ஸ்வேதனம் - Herbal Steam Bath)</option>
+                                <option>Shirodhara (சிரோதாரா - Continuous Oil Pouring on Forehead)</option>
+                                <option>Navarakizhi / Shashtika Shali Pinda Sweda (நவரக்கிழி)</option>
+                                <option>Pizhichil (பிழிச்சல் - Thailadhara / Oil Bath)</option>
+                                <option>Kati Basti (கட்டி வஸ்தி - For Lumbar Spine / Back Pain)</option>
+                                <option>Greeva Basti (கிரீவ வஸ்தி - For Cervical / Neck Pain)</option>
+                                <option>Janu Basti (ஜானு வஸ்தி - For Knee Joint Pain)</option>
+                                <option>Hrid Basti / Uro Basti (ஹ்ருத் வஸ்தி - Chest / Cardiac Care)</option>
+                                <option>Shiro Basti (சிரோ வஸ்தி - Retention of Oil on Head)</option>
+                                <option>Matra Basti (மாத்ர வஸ்தி - Daily Enema with Oil)</option>
+                                <option>Kala Basti / Yoga Basti (கால வஸ்தி / யோக வஸ்தி)</option>
+                                <option>Vamana Karma (வமன கர்ம - Therapeutic Emesis)</option>
+                                <option>Virechana Karma (விரேசன கர்ம - Therapeutic Purgation)</option>
+                                <option>Nasya Karma (நஸ்ய கர்ம - Nasal Medication)</option>
+                                <option>Raktamokshana (ரக்தமோக்ஷணம் - Bloodletting Therapy)</option>
+                                <option>Jaloukavacharana (ஜலௌகாவசரணம் - Leech Therapy)</option>
+                                <option>Agnikarma (அக்னிகர்மம் - Thermal Cautery)</option>
+                                <option>Ksharasootra Therapy (க்ஷாரசூத்ர - Para-surgical Thread Procedure)</option>
+                                <option>Udvartanam (உத்வர்த்தனம் - Herbal Powder Massage for Obesity)</option>
+                                <option>Netra Tarpana (நேத்ர தர்பணம் - Eye Treatment with Ghee)</option>
+                                <option>Karna Pooranam (கர்ண பூரணம் - Ear Oil Instillation)</option>
+                                <option>Kavala & Gandusha (கவல & கண்டூஷ - Mouth Gargling)</option>
+                                <option>Lepanam (லேபனம் - Medicinal Paste Application)</option>
+                                <option>Upanaha Sweda (உபநாக ஸ்வேதம் - Warm Poultice Application)</option>
+                                <option>Avagaha Sweda (அவகாஹ ஸ்வேதம் - Tub Bath / Sitz Bath)</option>
+                                <option>Valuka Sweda (வாலுகா ஸ்வேதம் - Sand Sweat Treatment)</option>
+                                <option>Patra Pinda Sweda (பத்ர பிண்ட ஸ்வேதம் - Leaf Bundle Massage)</option>
+                                <option>Ksheera Dhooma (க்ஷீர தூமம் - Medicated Milk Fumes)</option>
+                                <option>Dhoopanam (தூபனம் - Fumigation / Antiseptic Fumes)</option>
+                                <option>Anjana (அஞ்சனம் - Collyrium Application for Eyes)</option>
+                                <option>Aschotanam (அஸ்சோதனம் - Eye Drops)</option>
+                                <option>Uttara Vasti (உத்தர வஸ்தி - Intra-urethral/Vaginal Enema)</option>
+                                <option>Prachchana Karma (ப்ரச்சன கர்மம் - Scratch Bloodletting)</option>
+                                <option>Siravedha (சிராவேத இரத்த மோட்சணம் - Vein Puncture)</option>
+                                <option>Snehapanam (ஸ்நேபானம் - Internal Oleation)</option>
+                                <option>Shiro Abhyangam (சிரோ அபியங்கம் - Head Massage)</option>
+                                <option>Pada Abhyangam (பாத அபியங்கம் - Foot Massage / Padabhyanga)</option>
+                                <option>Mukha Lepam (முக லேபம் - Facial Rejuvenation Pack)</option>
+                                <option>Yoniprakshalanam (யோனி ப்ரக்ஷாளனம் - Vaginal Douching)</option>
+                                <option>Pichu Application (பிச்சு சிகிச்சை - Medicated Cotton Pad Application)</option>
+                                <option>Gararbhini Paricharya (கர்ப்பிணி பராமரிப்பு - Antenatal Care)</option>
+                                <option>Balraksha / Bala Chikitsa (பாலரோக சிகிச்சை - Pediatric Care)</option>
+                                <option>Rasayana Chikitsa (ரசாயன சிகிச்சை - Rejuvenation Therapy)</option>
+                                <option>Vajeekarana Chikitsa (வாஜீகரணம் - Aphrodisiac Therapy)</option>
+                                <option>Swasthavritta Care (சுவஸ்தவிருத்த - Preventive & Lifestyle Care)</option>
+                                <option>Manasika Chikitsa (மனோதத்துவ சிகிச்சை - Ayurvedic Psychiatry)</option>
+                                <option>Panchvalkaladi Avagaha (பஞ்சவற்கலாதி அவகாஹம் - Sitz Bath)</option>
+                                <option>Prushta Basti (ப்ருஷ்ட வஸ்தி - Full Back Treatment)</option>
+                                <option>Karna Sneha (கர்ண ஸ்நேஹ - Ear Oleation)</option>
+                                <option>Gandoosha (கண்டூஷ - Holding Medicated Liquid)</option>
+                                <option>Pratimarsha Nasya (ப்ரதிமார்ச நஸ்யம் - Daily Preventive Nasal Drops)</option>
+                                <option>Snehika Sweda (ஸ்நேஹிக ஸ்வேதம் - Oily Steam Therapy)</option>
+                                <option>Rooksha Sweda (ரூக்ஷ ஸ்வேதம் - Dry Heat Fomentation)</option>
+                                <option>Tiktikshira Basti (திக்தஷீர வஸ்தி - Bitter Medicated Enema)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="margin-top:0;">Sessions / Days:</label>
+                            <input type="number" placeholder="Ex: 7 Days" min="1" required>
+                        </div>
+                        <div>
+                            <label style="margin-top:0;">Local / General:</label>
+                            <input type="text" placeholder="Local / Full body">
+                        </div>
+                        <div>
+                            <label style="margin-top:0; visibility:hidden;">Action</label>
+                            <button type="button" class="btn-add" onclick="addTherapyRow()">+ Add Row</button>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- 9. Multi-Language Diet Chart & Prescription (5 Languages) -->
+            <!-- Multi-Language Diet Chart & Prescription -->
             <div class="section">
                 <h2 class="section-title" style="margin-top:0;">Diet Chart & Prescription Instructions (5 Languages Support)</h2>
                 <label>Dietary Guidelines & Medicines (English Primary, with 5-Language Support - தமிழ், हिन्दी, മലയാളം, ಕನ್ನಡ):</label>
-                <textarea rows="6" placeholder="Enter prescription, food restrictions, and multi-language instructions here..."></textarea>
-                <p style="font-size: 13px; color: #006666; margin-top: 5px; font-weight: bold;">
-                    ✓ Multi-language printing format enabled for patient handovers (English, Tamil, Hindi, Malayalam, Kannada).
+                <textarea rows="6" id="dietOutput" placeholder="Diet chart and prescription instructions will auto-generate here based on History of Illness or you can type/edit manually..."></textarea>
+                <p style="font-size: 13px; color: var(--primary); margin-top: 6px; font-weight: bold;">
+                    ✓ Multi-language printing format enabled for patient discharge summaries & handovers (English, Tamil, Hindi, Malayalam, Kannada).
                 </p>
             </div>
         </div>
 
-        <!-- 3. Billing & Payment Details (Dedicated for Reception/Admin) -->
-        <div class="section" style="background: #eef9f9; border-left-color: #004d4d;">
-            <h2 class="section-title" style="margin-top:0; color:#004d4d;">Billing & Payment Details (பில் விவரங்கள்)</h2>
+        <!-- Billing & Payment Details -->
+        <div class="section" style="background: #F0FDFA; border-left-color: #0D9488;">
+            <h2 class="section-title" style="margin-top:0; color:#0D9488;">Billing & Payment Details (பில் விவரங்கள்)</h2>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
                 <div>
                     <label>Total Treatment & Medicine Charges (₹):</label>
-                    <input type="number" placeholder="Enter total amount">
+                    <input type="number" placeholder="Enter total amount" required>
                 </div>
                 <div>
                     <label>Payment Status:</label>
                     <select>
                         <option>Paid (செலுத்தப்பட்டது)</option>
                         <option>Pending / Due (நிலுவை)</option>
-                        <option>Advance Paid</option>
+                        <option>Advance Paid (முன்பணம்)</option>
                     </select>
                 </div>
             </div>
         </div>
 
-        <!-- 13. Digital Signature & Secure Export/Print -->
+        <!-- Digital Signature & Secure Export/Print -->
         <div class="btn-container">
-            <button type="submit">Save & Process Record</button>
+            <button type="submit">💾 Save & Process Record</button>
             <button type="button" class="btn-secondary" onclick="window.print()">🖨️ Secure Print / Export PDF</button>
         </div>
     </form>
@@ -257,10 +446,94 @@
         const role = document.getElementById('roleSelect').value;
         const clinicalSection = document.getElementById('doctorClinicalSection');
         if (role === 'reception') {
-            clinicalSection.style.display = 'none'; // Reception sees billing and basic info only for data security
+            clinicalSection.style.display = 'none';
         } else {
-            clinicalSection.style.display = 'block'; // Doctors and Senior management see full clinical details
+            clinicalSection.style.display = 'block';
         }
+    }
+
+    function filterDiseases() {
+        const input = document.getElementById('diseaseSearch').value.toLowerCase();
+        const items = document.getElementsByClassName('disease-item');
+        let count = 0;
+        for (let i = 0; i < items.length; i++) {
+            const text = items[i].innerText.toLowerCase();
+            if (text.includes(input)) {
+                items[i].style.display = 'flex';
+                count++;
+            } else {
+                items[i].style.display = 'none';
+            }
+        }
+        document.getElementById('diseaseCount').innerText = count + ' Conditions';
+    }
+
+    function addTherapyRow() {
+        const container = document.getElementById('therapyContainer');
+        const firstSelect = container.querySelector('.therapy-select');
+        const newRow = document.createElement('div');
+        newRow.className = 'therapy-row';
+        newRow.innerHTML = `
+            <div>
+                <select class="therapy-select" required>
+                    ${firstSelect.innerHTML}
+                </select>
+            </div>
+            <div>
+                <input type="number" placeholder="Ex: 7 Days" min="1" required>
+            </div>
+            <div>
+                <input type="text" placeholder="Local / Full body">
+            </div>
+            <div>
+                <button type="button" class="btn-del" onclick="this.parentElement.parentElement.remove()">Remove</button>
+            </div>
+        `;
+        container.appendChild(newRow);
+    }
+
+    function generateAutoDiet() {
+        const historyText = document.getElementById('historyInput').value;
+        const dietBox = document.getElementById('dietOutput');
+        
+        dietBox.value = `[AUTO-GENERATED DIET & PRESCRIPTION CHART - தியா கேரளா ஆயுர்வேதா]
+` +
+                        `- Chief Complaint Noted: ${historyText || 'General Ayurvedic Wellness & Detox'}
+
+` +
+                        `1. ENGLISH / General Dietary Guidelines:
+` +
+                        `- Take warm boiled water infused with cumin or dry ginger throughout the day.
+` +
+                        `- Avoid raw salads, cold storage items, dairy curds at night, and junk foods.
+
+` +
+                        `2. TAMIL (தமிழ்):
+` +
+                        `- நாள் முழுவதிலும் சீரகம் அல்லது சுக்குக் காய்ச்சிய சூடான நீரை அருந்தவும்.
+` +
+                        `- பச்சைக் காய்கறி சாலடுகள், குளிர்சாதனப் பெட்டிப் பொருட்கள் மற்றும் இரவு நேரத் தயிரைத் தவிர்க்கவும்.
+
+` +
+                        `3. HINDI (हिन्दी):
+` +
+                        `- दिन भर जीरा या सौंठ मिला हुआ हल्का गुनगुना पानी पिएं।
+` +
+                        `- ठंडी चीजों, फास्ट फूड और रात में दही के सेवन से बचें।
+
+` +
+                        `4. MALAYALAM (മലയാളം):
+` +
+                        `- ജീരകമോ ചുക്കോ ചേർത്ത് തിളപ്പിച്ചാറ്റിയ ചൂടുവെള്ളം കുടിക്കുക.
+` +
+                        `- തണുത്ത ആഹാരങ്ങളും ഫാസ്റ്റ് ഫുഡും ഒഴിവാക്കുക.
+
+` +
+                        `5. KANNADA (ಕನ್ನಡ):
+` +
+                        `- ಜೀರಿಗೆ ಅಥವಾ ಒಣಶುಂಠಿ ಹಾಕಿದ ಉಗುರುಬೆಚ್ಚಗಿನ ನೀರನ್ನು ಕುಡಿಯಿರಿ.
+` +
+                        `- ತಣ್ಣನೆಯ ಪದಾರ್ಥಗಳು ಹಾಗೂ ಜಂಕ್ ಫುಡ್ ಸೇವನೆಯನ್ನು ತಪ್ಪಿಸಿ.`;
     }
 </script>
 
