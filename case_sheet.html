@@ -3,210 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Case Sheet & Prescription - Dhiya Kerala Ayurveda</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Multi-Branch Medical Case Sheet & Billing System</title>
     <style>
-        body {
-            background-color: #f4f7f6;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        .header-container {
-            background: linear-gradient(135deg, #12382c, #1b4d3e, #2e8b57);
-            color: white;
-            padding: 25px 20px;
-            border-radius: 0 0 25px 25px;
-            box-shadow: 0 6px 25px rgba(0,0,0,0.2);
-            margin-bottom: 30px;
-            border-left: 4px solid #d4af37;
-            border-right: 4px solid #d4af37;
-            border-bottom: 4px solid #d4af37;
-        }
-        .logo-img {
-            max-height: 140px;
-            width: auto;
-            object-fit: contain;
-            display: block;
-            margin: 0 auto;
-        }
-        .card-custom {
-            border: none;
-            border-radius: 15px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.06);
-            background: #ffffff;
-            padding: 30px;
-            margin-bottom: 30px;
-            border-top: 4px solid #1b4d3e;
-        }
-        .form-label {
-            font-weight: 600;
-            color: #2c3e50;
-        }
-        .btn-success-custom {
-            background-color: #d4af37;
-            color: #12382c;
-            border: none;
-            padding: 15px 25px;
-            font-weight: bold;
-            font-size: 1.05rem;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-        .btn-success-custom:hover {
-            background-color: #c19b2e;
-            color: #ffffff;
-            transform: translateY(-1px);
-        }
-        .hospital-info-clean {
-            font-size: 0.88rem;
-            margin-top: 12px;
-            line-height: 1.6;
-            border-top: 1px solid rgba(212, 175, 55, 0.4);
-            padding-top: 10px;
-        }
-        @media print {
-            .no-print { display: none !important; }
-            body { background-color: #ffffff; }
-            .card-custom { box-shadow: none; border: none; padding: 0; }
-        }
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f4f7f6; color: #333; }
+        .container { max-width: 1000px; margin: auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2 { color: #006666; border-bottom: 2px solid #006666; padding-bottom: 5px; }
+        .section { margin-bottom: 20px; padding: 15px; background: #f9f9f9; border-radius: 5px; border-left: 4px solid #006666; }
+        label { font-weight: bold; display: block; margin-top: 10px; }
+        input[type="text"], input[type="number"], select, textarea { width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        .checkbox-group { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin-top: 10px; }
+        .checkbox-item { display: flex; align-items: center; gap: 5px; }
+        .role-box { background: #e6f2f2; padding: 10px; margin-bottom: 15px; border-radius: 4px; border: 1px dashed #006666; }
+        button { background: #006666; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; margin-top: 20px; }
+        button:hover { background: #004d4d; }
     </style>
 </head>
 <body>
 
-    <!-- Header & Logo Section (Present on every page for Premium Look) -->
-    <div class="header-container">
-        <div class="container-fluid">
-            <div class="row align-items-center">
-                <div class="col-md-2 text-center mb-3 mb-md-0">
-                    <img src="logo.png" alt="Dhiya Kerala Ayurveda Logo" class="logo-img" onerror="this.style.display='none'">
-                </div>
-                
-                <div class="col-md-10 text-center text-md-start">
-                    <h1 class="fw-bold mb-1" style="font-size: 1.5rem; letter-spacing: 0.5px; color: #ffffff;">
-                        தியா கேரளா ஆயுர்வேத பஞ்சகர்மா வைத்தியசாலை
-                    </h1>
-                    <h2 class="fw-bold mb-2" style="font-size: 1.1rem; color: #f3d482; letter-spacing: 0.5px;">
-                        Dhiya Kerala Ayurveda Panchakarma Vaidhyasalai
-                    </h2>
-                    
-                    <p class="mb-1 fw-bold text-warning" style="font-size: 0.9rem;">
-                        Govt Reg number / அரசு பதிவு எண்: TVMIAYU20260042869
-                    </p>
-                    
-                    <p class="mb-1 text-light small fw-semibold">
-                        Traditional Kerala Ayurveda | Panchakarma | Varma | Physiotherapy | Cosmetology <br>
-                        <span class="fst-italic text-warning">பாரம்பரிய கேரளா ஆயுர்வேதா | பஞ்சகர்மா | வர்ம மருத்துவம் | பிசியோதெரபி</span>
-                    </p>
+<div class="container">
+    <h1>Multi-Branch Hospital Management System</h1>
 
-                    <div class="hospital-info-clean text-light">
-                        <div class="row">
-                            <div class="col-md-6 mb-1 mb-md-0">
-                                <strong><i class="fas fa-hospital me-1 text-warning"></i> Main Hospital:</strong> Polur, Tiruvannamalai - 606803.
-                            </div>
-                            <div class="col-md-6">
-                                <strong><i class="fas fa-code-branch me-1 text-warning"></i> Branch:</strong> Vengikkal, Tiruvannamalai - 606604.
-                            </div>
-                        </div>
-                        <div class="mt-2 text-center text-md-start border-top border-light opacity-85 pt-1">
-                            <strong><i class="fas fa-phone-alt me-1 text-warning"></i> Contact:</strong> 9710703855, 9171731744
-                        </div>
-                    </div>
-                </div>
+    <!-- Role & Branch Selection -->
+    <div class="role-box">
+        <h2>System Access & Branch Control</h2>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <div>
+                <label>Select Branch (கிளை):</label>
+                <select id="branchSelect">
+                    <option value="tiruvannamalai">Tiruvannamalai Branch</option>
+                    <option value="branch2">Branch 2</option>
+                </select>
+            </div>
+            <div>
+                <label>User Role (பயனர் நிலை):</label>
+                <select id="roleSelect" onchange="toggleView()">
+                    <option value="senior_doctor">Senior Doctor (Full Access - All Branches)</option>
+                    <option value="junior_doctor">Junior Doctor (Branch Access)</option>
+                    <option value="reception">Reception / Admin (Billing Only)</option>
+                </select>
             </div>
         </div>
     </div>
 
-    <!-- Main Case Sheet & Prescription Section -->
-    <div class="container pb-5">
-        <div class="card card-custom">
-            <h3 class="text-success mb-4 pb-2 border-bottom fw-bold">
-                <i class="fas fa-file-medical me-2"></i> Case Sheet & Prescription / மருத்துவக் குறிப்பு & மருந்துச் சீட்டு
-            </h3>
+    <form>
+        <!-- Patient Details -->
+        <div class="section">
+            <h2>Patient Information</h2>
+            <label>Patient Name (பெயர்):</label>
+            <input type="text" placeholder="Enter patient name">
+            
+            <label>Age / Gender (வயது / பாலினம்):</label>
+            <input type="text" placeholder="Age & Gender">
+        </div>
 
-            <form id="prescriptionForm">
-                <div class="row g-3">
-                    <!-- Patient Summary Info -->
-                    <div class="col-md-4">
-                        <label class="form-label">Patient ID / நோயாளி ஐடி</label>
-                        <input type="text" class="form-control bg-light" id="casePatientID" value="DKA-2026" readonly>
+        <!-- DOCTOR SECTION (Hidden for Reception) -->
+        <div id="doctorSection">
+            <!-- Vitals & Uploads -->
+            <div class="section">
+                <h2>Vitals & Medical Reports (Doctor View Only)</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 10px;">
+                    <div>
+                        <label>Height (உயரம்):</label>
+                        <input type="text" placeholder="cm/ft">
                     </div>
-                    <div class="col-md-4">
-                        <label class="form-label">Patient Name / நோயாளி பெயர்</label>
-                        <input type="text" class="form-control" id="casePatientName" placeholder="Enter Name">
+                    <div>
+                        <label>Weight (எடை):</label>
+                        <input type="text" placeholder="kg">
                     </div>
-                    <div class="col-md-4">
-                        <label class="form-label">Date / தேதி</label>
-                        <input type="date" class="form-control" id="caseDate">
+                    <div>
+                        <label>BP (ரத்த அழுத்தம்):</label>
+                        <input type="text" placeholder="mmHg">
                     </div>
-
-                    <!-- Clinical Diagnosis / Symptoms -->
-                    <div class="col-12 mt-3">
-                        <label for="diagnosis" class="form-label">Clinical Diagnosis / Symptoms (நாடி பரிசோதனை / நோய்க்கான அறிகுறிகள்)</label>
-                        <textarea class="form-control" id="diagnosis" rows="3" placeholder="Enter symptoms, pulse diagnosis details (Vata, Pitta, Kapha)..."></textarea>
-                    </div>
-
-                    <!-- Ayurveda Medicines Selection -->
-                    <div class="col-12 mt-4">
-                        <h5 class="text-success fw-bold mb-3"><i class="fas fa-pills me-2"></i> Ayurveda Medicines & Dosage / ஆயுர்வேத மருந்துகள் மற்றும் அளவுகள்</h5>
-                        <div class="border p-3 rounded bg-light">
-                            <div class="row g-2">
-                                <div class="col-md-5">
-                                    <input type="text" class="form-control" id="medName" placeholder="Medicine Name (e.g., Dhanwantharam Kashayam)">
-                                </div>
-                                <div class="col-md-4">
-                                    <input type="text" class="form-control" id="medDosage" placeholder="Dosage (e.g., 15ml with warm water)">
-                                </div>
-                                <div class="col-md-3">
-                                    <select class="form-select" id="medTiming">
-                                        <option value="Before Food / உணவுக்கு முன்">Before Food / உணவுக்கு முன்</option>
-                                        <option value="After Food / உணவுக்குப் பின்">After Food / உணவுக்குப் பின்</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Panchakarma / External Therapies Recommended -->
-                    <div class="col-12 mt-3">
-                        <label for="panchakarmaNotes" class="form-label">Panchakarma / External Therapies / பஞ்சகர்மா சிகிச்சைகள்</label>
-                        <textarea class="form-control" id="panchakarmaNotes" rows="2" placeholder="e.g., Shirodhara, Vasti, Nasyam..."></textarea>
-                    </div>
-
-                    <!-- Diet / Pathyam Instructions (Bilingual) -->
-                    <div class="col-12 mt-3">
-                        <label for="dietInstructions" class="form-label">Diet & Lifestyle Instructions (Pathyam / பத்திய முறை மற்றும் உணவு கட்டுப்பாடுகள்)</label>
-                        <textarea class="form-control" id="dietInstructions" rows="2" placeholder="Avoid oily & cold items. Take warm water. / எண்ணெய் மற்றும் குளிர்ச்சியான பொருட்களைத் தவிர்க்கவும்..."></textarea>
-                    </div>
-
-                    <!-- Print & Navigation Buttons -->
-                    <div class="col-12 text-center mt-4 no-print">
-                        <button type="button" class="btn btn-outline-primary px-4 py-2 me-2 fw-bold" onclick="window.print()">
-                            <i class="fas fa-print me-2"></i> Print Prescription / பிரின்ட் எடுக்க
-                        </button>
-                        <button type="submit" class="btn btn-success-custom px-5 py-2">
-                            <i class="fas fa-check-circle me-2"></i> Save & Finish / சேமித்து முடிக்கவும்
-                        </button>
+                    <div>
+                        <label>Sugar (சர்க்கரை அளவு):</label>
+                        <input type="text" placeholder="mg/dL">
                     </div>
                 </div>
-            </form>
+
+                <label>Upload Scan/Reports (ஸ்கேன் ரிப்போர்ட் அப்லோட்):</label>
+                <input type="file" multiple>
+            </div>
+
+            <!-- Panchakarma & Conditions -->
+            <div class="section">
+                <h2>Panchakarma Therapies & Conditions</h2>
+                <label>Select Panchakarma (பஞ்சகர்மா சிகிச்சைகள்):</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item"><input type="checkbox"> Vamana (வமனம்)</div>
+                    <div class="checkbox-item"><input type="checkbox"> Virechana (விரேசனம்)</div>
+                    <div class="checkbox-item"><input type="checkbox"> Basti (வஸ்தி)</div>
+                    <div class="checkbox-item"><input type="checkbox"> Nasya (நஸ்யம்)</div>
+                    <div class="checkbox-item"><input type="checkbox"> Raktamokshana (ரக்தமோக்ஷணம்)</div>
+                </div>
+            </div>
+
+            <!-- Multi-language Diet & Prescription Instructions -->
+            <div class="section">
+                <h2>Diet Chart & Prescription Instructions (Multi-Language)</h2>
+                <label>Diet Description & Medication Guidelines (உணவு முறை மற்றும் மருந்து உண்ணும் முறை):</label>
+                <textarea rows="4" placeholder="Enter instructions (Supports English, Tamil, Hindi, Malayalam, Kannada)..."></textarea>
+                <p style="font-size: 13px; color: #666; margin-top: 5px;">
+                    * Multi-language support enabled for patient prescriptions and diet charts.
+                </p>
+            </div>
         </div>
-    </div>
 
-    <!-- Script to set today date -->
-    <script>
-        window.onload = function() {
-            const today = new Date().toISOString().split('T')[0];
-            document.getElementById('caseDate').value = today;
-        };
+        <!-- RECEPTION / BILLING SECTION (Visible to All, Main focus for Admin/Reception) -->
+        <div class="section" style="background: #eef9f9; border-left-color: #004d4d;">
+            <h2>Billing & Payment Details (பில் விவரங்கள்)</h2>
+            <label>Total Bill Amount (மொத்த கட்டணம் - ₹):</label>
+            <input type="number" placeholder="Enter total bill amount">
+        </div>
 
-        document.getElementById('prescriptionForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert("Prescription saved successfully! Medical record updated.");
-            window.location.href = "index.html";
-        });
-    </script>
+        <button type="submit">Save Record</button>
+    </form>
+</div>
+
+<script>
+    function toggleView() {
+        const role = document.getElementById('roleSelect').value;
+        const doctorSection = document.getElementById('doctorSection');
+        
+        if (role === 'reception') {
+            doctorSection.style.display = 'none'; // Receptionists cannot see medical case sheets
+        } else {
+            doctorSection.style.display = 'block'; // Senior and Junior doctors can view clinical details
+        }
+    }
+</script>
+
 </body>
 </html>
