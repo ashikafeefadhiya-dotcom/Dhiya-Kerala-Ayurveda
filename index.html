@@ -80,11 +80,11 @@
                 </div>
                 
                 <div class="col-md-10 text-center text-md-start">
-                    <!-- First Line: Tamil Name (Complete with Panchakarma Vaidhyasalai) -->
+                    <!-- First Line: Tamil Name -->
                     <h1 class="fw-bold mb-1" style="font-size: 1.5rem; letter-spacing: 0.5px; color: #ffffff;">
                         தியா கேரளா ஆயுர்வேத பஞ்சகர்மா வைத்தியசாலை
                     </h1>
-                    <!-- Second Line: English Name (Complete with Panchakarma Vaidhyasalai) -->
+                    <!-- Second Line: English Name -->
                     <h2 class="fw-bold mb-2" style="font-size: 1.1rem; color: #f3d482; letter-spacing: 0.5px;">
                         Dhiya Kerala Ayurveda Panchakarma Vaidhyasalai
                     </h2>
@@ -185,8 +185,8 @@
                     <div class="col-12">
                         <label for="regDoctor" class="form-label">மருத்துவர் (Consulting Doctor)</label>
                         <select class="form-select" id="regDoctor" required>
-                            <option value="Dr. S. Ashik Ali, B.A.M.S, M.B.A. (Hospital Mgmt), D.P.T, F.M.C. (Govt Reg: 0124)">1. Dr. S. Ashik Ali, B.A.M.S, M.B.A. (Hospital Mgmt), D.P.T, F.M.C. (Govt Reg: 0124)</option>
-                            <option value="Dr. R. Puvana, B.A.M.S, M.B.A. (Hospital Mgmt), Msc (Yoga & Naturopathy), P.G.D.A.C. (UK), F.M.C. (Govt Reg: 0162)">2. Dr. R. Puvana, B.A.M.S, M.B.A. (Hospital Mgmt), Msc (Yoga & Naturopathy), P.G.D.A.C. (UK), F.M.C. (Govt Reg: 0162)</option>
+                            <option value="Dr. S. Ashik Ali, B.A.M.S, M.B.A. (Hospital Mgmt), D.P.T, F.M.C. (Govt Reg: 0124)">Dr. S. Ashik Ali, B.A.M.S, M.B.A. (Hospital Mgmt), D.P.T, F.M.C. (Govt Reg: 0124)</option>
+                            <option value="Dr. R. Puvana, B.A.M.S, M.B.A. (Hospital Mgmt), Msc (Yoga & Naturopathy), P.G.D.A.C. (UK), F.M.C. (Govt Reg: 0162)">Dr. R. Puvana, B.A.M.S, M.B.A. (Hospital Mgmt), Msc (Yoga & Naturopathy), P.G.D.A.C. (UK), F.M.C. (Govt Reg: 0162)</option>
                         </select>
                     </div>
 
@@ -306,16 +306,16 @@
                             <p><strong>நோயாளி ஐடி (Patient ID):</strong> ${pID}</p>
                             <p><strong>நோயாளி பெயர் (Patient Name):</strong> ${pName}</p>
                             <p><strong>மொபைல் எண் (Mobile):</strong> ${pPhone}</p>
-                            <p><strong>மருத்துவர் (Consulting Doctor):</strong> ${pDoc}</p>
+                            <p><strong>சிகிச்சை அளிக்கும் மருத்துவர் (Consulting Doctor):</strong> <span class="text-success fw-bold">${pDoc}</span></p>
                             <hr>
-                            <p class="mt-3">நான் மேற்கண்ட தியா கேரளா ஆயுர்வேத பஞ்சகர்மா வைத்தியசாலையில் எனது முழு விருப்பத்தின் பேரில் இந்தச் சிகிச்சையை (<strong>${selectedFormTitle}</strong>) மேற்கொள்ள முழு சம்மதம் தெரிவிக்கிறேன். சிகிச்சையின் வழிமுறைகள் மற்றும் முறைகள் எனக்கு விளக்கப்பட்டுள்ளது.</p>
+                            <p class="mt-3">நான் மேற்கண்ட தியா கேரளா ஆயுர்வேத பஞ்சகர்மா வைத்தியசாலையில் எனது முழு விருப்பத்தின் பேரில் இந்தச் சிகிச்சையை (<strong>${selectedFormTitle}</strong>) மேற்கொள்ள முழு சம்மதம் தெரிவிக்கிறேன். சிகிச்சையின் வழிமுறைகள் மற்றும் முறைகள் மருத்துவர் மூலமாக எனக்கு விளக்கப்பட்டுள்ளது.</p>
                         </div>
                         <div class="row mt-5">
                             <div class="col-6">
                                 <p class="mt-4">___________________________<br><strong>நோயாளி / உறவினர் கையெழுத்து</strong></p>
                             </div>
                             <div class="col-6 text-end">
-                                <p class="mt-4">___________________________<br><strong>மருத்துவர் / ரிசப்ஷன் கையெழுத்து</strong></p>
+                                <p class="mt-4">___________________________<br><strong>மருத்துவர் கையெழுத்து & முத்திரை</strong><br><small class="text-muted">${pDoc}</small></p>
                             </div>
                         </div>
                         <div class="text-center mt-5 no-print">
